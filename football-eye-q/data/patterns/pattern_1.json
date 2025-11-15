@@ -6,7 +6,7 @@
       {
         "phase": 1,
         "nodes": [
-          { "node": 1, "color": "Black", "secs": 4 },
+          { "node": 1, "color": "Magenta", "secs": 4 },
           { "node": 2, "color": "Black", "secs": 4 },
           { "node": 3, "color": "Blue", "secs": 5 },
           { "node": 4, "color": "Black", "secs": 4 },
