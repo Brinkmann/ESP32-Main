@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FEQ Wi-Fi Mgr</title>
+    <link rel="stylesheet" href="styles/wifi_mgr_style.css" />
+    <link rel="icon" type="image/x-icon" href="assets/wifi_mgr_icon.ico" />
+  </head>
+  <body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+      <h1>FEQ Wi-Fi Manager HUB</h1>
+    </nav>
+    <div class="card-grid">
+      <div class="card">
+        <h2>WiFi Configuration</h2>
+        <form id="wifi-form">
+          <!-- Using Flexbox to align elements vertically -->
+          <div class="input-group">
+            <label for="ssid">SSID</label>
+            <input type="text" id="ssid" required />
+          </div>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" required />
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+    <div id="popup-dialog" class="modal">
+      <div class="modal-content">
+        <h3 id="progress-text">
+          Configuring your FEQ HUB, Your device will restart in 5 Seconds
+        </h3>
+        <div class="loader"></div>
+      </div>
+    </div>
+    <nav class="bottom-nav">
+      Please enter credenials, to be used in your FEQ-HUB Unit.
+    </nav>
+    <script src="logic/wifi_mgr_index.js"></script>
+  </body>
+</html>

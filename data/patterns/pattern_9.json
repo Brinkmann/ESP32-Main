@@ -1,0 +1,51 @@
+{
+  "pattern_grouped": {
+    "duration": 4,
+    "phases": [
+      {
+        "phase": 1,
+        "nodes": [
+          { "node": 1, "color": "Blue", "secs": 1 },
+          { "node": 2, "color": "Black", "secs": 1 },
+          { "node": 3, "color": "Black", "secs": 1 },
+          { "node": 4, "color": "Blue", "secs": 1 },
+          { "node": 5, "color": "Black", "secs": 1 },
+          { "node": 6, "color": "Black", "secs": 1 }
+        ]
+      },
+      {
+        "phase": 2,
+        "nodes": [
+          { "node": 1, "color": "Black", "secs": 1 },
+          { "node": 2, "color": "Blue", "secs": 1 },
+          { "node": 3, "color": "Black", "secs": 1 },
+          { "node": 4, "color": "Black", "secs": 1 },
+          { "node": 5, "color": "Blue", "secs": 1 },
+          { "node": 6, "color": "Black", "secs": 1 }
+        ]
+      },
+      {
+        "phase": 3,
+        "nodes": [
+          { "node": 1, "color": "Black", "secs": 1 },
+          { "node": 2, "color": "Black", "secs": 1 },
+          { "node": 3, "color": "Blue", "secs": 1 },
+          { "node": 4, "color": "Black", "secs": 1 },
+          { "node": 5, "color": "Black", "secs": 1 },
+          { "node": 6, "color": "Blue", "secs": 1 }
+        ]
+      },
+      {
+        "phase": 4,
+        "nodes": [
+          { "node": 1, "color": "Blue", "secs": 1 },
+          { "node": 2, "color": "Black", "secs": 1 },
+          { "node": 3, "color": "Black", "secs": 1 },
+          { "node": 4, "color": "Blue", "secs": 1 },
+          { "node": 5, "color": "Black", "secs": 1 },
+          { "node": 6, "color": "Black", "secs": 1 }
+        ]
+      }
+    ]
+  }
+}

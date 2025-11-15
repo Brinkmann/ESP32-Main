@@ -1,0 +1,238 @@
+{
+  "_comment": "this is a comment in JSON",
+  "pattern_11": {
+    "duration": 20,
+    "phases": [
+      {
+        "phase": 1,
+        "nodes": [
+          { "node": 1, "color": "Green", "secs": 1 },
+          { "node": 2, "color": "Blue", "secs": 1 },
+          { "node": 3, "color": "Blue", "secs": 1 },
+          { "node": 4, "color": "Blue", "secs": 1 },
+          { "node": 5, "color": "Blue", "secs": 1 },
+          { "node": 6, "color": "Blue", "secs": 1 },
+          { "node": 7, "color": "Blue", "secs": 1 },
+          { "node": 8, "color": "Blue", "secs": 1 },
+          { "node": 9, "color": "Blue", "secs": 1 },
+          { "node": 10, "color": "Blue", "secs": 1 },
+          { "node": 11, "color": "Black", "secs": 1 },
+          { "node": 12, "color": "Blue", "secs": 1 },
+          { "node": 13, "color": "Blue", "secs": 1 },
+          { "node": 14, "color": "Blue", "secs": 1 },
+          { "node": 15, "color": "Blue", "secs": 1 },
+          { "node": 16, "color": "Blue", "secs": 1 },
+          { "node": 17, "color": "Blue", "secs": 1 },
+          { "node": 18, "color": "Blue", "secs": 1 }
+        ]
+      },
+      {
+        "phase": 2,
+        "nodes": [
+          { "node": 1, "color": "Red", "secs": 1 },
+          { "node": 2, "color": "Black", "secs": 1 },
+          { "node": 3, "color": "Blue", "secs": 1 },
+          { "node": 4, "color": "Blue", "secs": 1 },
+          { "node": 5, "color": "Blue", "secs": 1 },
+          { "node": 6, "color": "Blue", "secs": 1 },
+          { "node": 7, "color": "Blue", "secs": 1 },
+          { "node": 8, "color": "Blue", "secs": 1 },
+          { "node": 9, "color": "Blue", "secs": 1 },
+          { "node": 10, "color": "Blue", "secs": 1 },
+          { "node": 11, "color": "Blue", "secs": 1 },
+          { "node": 12, "color": "Black", "secs": 1 },
+          { "node": 13, "color": "Blue", "secs": 1 },
+          { "node": 14, "color": "Blue", "secs": 1 },
+          { "node": 15, "color": "Blue", "secs": 1 },
+          { "node": 16, "color": "Blue", "secs": 1 },
+          { "node": 17, "color": "Blue", "secs": 1 },
+          { "node": 18, "color": "Blue", "secs": 1 }
+        ]
+      },
+      {
+        "phase": 3,
+        "nodes": [
+          { "node": 1, "color": "Yellow", "secs": 1 },
+          { "node": 2, "color": "Blue", "secs": 1 },
+          { "node": 3, "color": "Black", "secs": 1 },
+          { "node": 4, "color": "Blue", "secs": 1 },
+          { "node": 5, "color": "Blue", "secs": 1 },
+          { "node": 6, "color": "Blue", "secs": 1 },
+          { "node": 7, "color": "Blue", "secs": 1 },
+          { "node": 8, "color": "Blue", "secs": 1 },
+          { "node": 9, "color": "Blue", "secs": 1 },
+          { "node": 10, "color": "Blue", "secs": 1 },
+          { "node": 11, "color": "Blue", "secs": 1 },
+          { "node": 12, "color": "Blue", "secs": 1 },
+          { "node": 13, "color": "Black", "secs": 1 },
+          { "node": 14, "color": "Blue", "secs": 1 },
+          { "node": 15, "color": "Blue", "secs": 1 },
+          { "node": 16, "color": "Blue", "secs": 1 },
+          { "node": 17, "color": "Blue", "secs": 1 },
+          { "node": 18, "color": "Blue", "secs": 1 }
+        ]
+      },
+      {
+        "phase": 4,
+        "nodes": [
+          { "node": 1, "color": "Blue", "secs": 1 },
+          { "node": 2, "color": "Blue", "secs": 1 },
+          { "node": 3, "color": "Blue", "secs": 1 },
+          { "node": 4, "color": "Black", "secs": 1 },
+          { "node": 5, "color": "Blue", "secs": 1 },
+          { "node": 6, "color": "Blue", "secs": 1 },
+          { "node": 7, "color": "Blue", "secs": 1 },
+          { "node": 8, "color": "Blue", "secs": 1 },
+          { "node": 9, "color": "Blue", "secs": 1 },
+          { "node": 10, "color": "Blue", "secs": 1 },
+          { "node": 11, "color": "Blue", "secs": 1 },
+          { "node": 12, "color": "Blue", "secs": 1 },
+          { "node": 13, "color": "Blue", "secs": 1 },
+          { "node": 14, "color": "Black", "secs": 1 },
+          { "node": 15, "color": "Blue", "secs": 1 },
+          { "node": 16, "color": "Blue", "secs": 1 },
+          { "node": 17, "color": "Blue", "secs": 1 },
+          { "node": 18, "color": "Blue", "secs": 1 }
+        ]
+      },
+      {
+        "phase": 5,
+        "nodes": [
+          { "node": 1, "color": "Green", "secs": 1 },
+          { "node": 2, "color": "Blue", "secs": 1 },
+          { "node": 3, "color": "Blue", "secs": 1 },
+          { "node": 4, "color": "Blue", "secs": 1 },
+          { "node": 5, "color": "Black", "secs": 1 },
+          { "node": 6, "color": "Blue", "secs": 1 },
+          { "node": 7, "color": "Blue", "secs": 1 },
+          { "node": 8, "color": "Blue", "secs": 1 },
+          { "node": 9, "color": "Blue", "secs": 1 },
+          { "node": 10, "color": "Blue", "secs": 1 },
+          { "node": 11, "color": "Blue", "secs": 1 },
+          { "node": 12, "color": "Blue", "secs": 1 },
+          { "node": 13, "color": "Blue", "secs": 1 },
+          { "node": 14, "color": "Blue", "secs": 1 },
+          { "node": 15, "color": "Black", "secs": 1 },
+          { "node": 16, "color": "Blue", "secs": 1 },
+          { "node": 17, "color": "Blue", "secs": 1 },
+          { "node": 18, "color": "Blue", "secs": 1 }
+        ]
+      },
+      {
+        "phase": 6,
+        "nodes": [
+          { "node": 1, "color": "Red", "secs": 1 },
+          { "node": 2, "color": "Blue", "secs": 1 },
+          { "node": 3, "color": "Blue", "secs": 1 },
+          { "node": 4, "color": "Blue", "secs": 1 },
+          { "node": 5, "color": "Blue", "secs": 1 },
+          { "node": 6, "color": "Black", "secs": 1 },
+          { "node": 7, "color": "Blue", "secs": 1 },
+          { "node": 8, "color": "Blue", "secs": 1 },
+          { "node": 9, "color": "Blue", "secs": 1 },
+          { "node": 10, "color": "Blue", "secs": 1 },
+          { "node": 11, "color": "Blue", "secs": 1 },
+          { "node": 12, "color": "Blue", "secs": 1 },
+          { "node": 13, "color": "Blue", "secs": 1 },
+          { "node": 14, "color": "Blue", "secs": 1 },
+          { "node": 15, "color": "Blue", "secs": 1 },
+          { "node": 16, "color": "Black", "secs": 1 },
+          { "node": 17, "color": "Blue", "secs": 1 },
+          { "node": 18, "color": "Blue", "secs": 1 }
+        ]
+      },
+      {
+        "phase": 7,
+        "nodes": [
+          { "node": 1, "color": "Yellow", "secs": 1 },
+          { "node": 2, "color": "Blue", "secs": 1 },
+          { "node": 3, "color": "Blue", "secs": 1 },
+          { "node": 4, "color": "Blue", "secs": 1 },
+          { "node": 5, "color": "Blue", "secs": 1 },
+          { "node": 6, "color": "Blue", "secs": 1 },
+          { "node": 7, "color": "Black", "secs": 1 },
+          { "node": 8, "color": "Blue", "secs": 1 },
+          { "node": 9, "color": "Blue", "secs": 1 },
+          { "node": 10, "color": "Blue", "secs": 1 },
+          { "node": 11, "color": "Blue", "secs": 1 },
+          { "node": 12, "color": "Blue", "secs": 1 },
+          { "node": 13, "color": "Blue", "secs": 1 },
+          { "node": 14, "color": "Blue", "secs": 1 },
+          { "node": 15, "color": "Blue", "secs": 1 },
+          { "node": 16, "color": "Blue", "secs": 1 },
+          { "node": 17, "color": "Black", "secs": 1 },
+          { "node": 18, "color": "Blue", "secs": 1 }
+        ]
+      },
+      {
+        "phase": 8,
+        "nodes": [
+          { "node": 1, "color": "Blue", "secs": 1 },
+          { "node": 2, "color": "Blue", "secs": 1 },
+          { "node": 3, "color": "Blue", "secs": 1 },
+          { "node": 4, "color": "Blue", "secs": 1 },
+          { "node": 5, "color": "Blue", "secs": 1 },
+          { "node": 6, "color": "Blue", "secs": 1 },
+          { "node": 7, "color": "Blue", "secs": 1 },
+          { "node": 8, "color": "Black", "secs": 1 },
+          { "node": 9, "color": "Blue", "secs": 1 },
+          { "node": 10, "color": "Blue", "secs": 1 },
+          { "node": 11, "color": "Blue", "secs": 1 },
+          { "node": 12, "color": "Blue", "secs": 1 },
+          { "node": 13, "color": "Blue", "secs": 1 },
+          { "node": 14, "color": "Blue", "secs": 1 },
+          { "node": 15, "color": "Blue", "secs": 1 },
+          { "node": 16, "color": "Blue", "secs": 1 },
+          { "node": 17, "color": "Blue", "secs": 1 },
+          { "node": 18, "color": "Black", "secs": 1 }
+        ]
+      },
+      {
+        "phase": 9,
+        "nodes": [
+          { "node": 1, "color": "Green", "secs": 1 },
+          { "node": 2, "color": "Blue", "secs": 1 },
+          { "node": 3, "color": "Blue", "secs": 1 },
+          { "node": 4, "color": "Blue", "secs": 1 },
+          { "node": 5, "color": "Blue", "secs": 1 },
+          { "node": 6, "color": "Blue", "secs": 1 },
+          { "node": 7, "color": "Blue", "secs": 1 },
+          { "node": 8, "color": "Blue", "secs": 1 },
+          { "node": 9, "color": "Black", "secs": 1 },
+          { "node": 10, "color": "Blue", "secs": 1 },
+          { "node": 11, "color": "Blue", "secs": 1 },
+          { "node": 12, "color": "Blue", "secs": 1 },
+          { "node": 13, "color": "Blue", "secs": 1 },
+          { "node": 14, "color": "Blue", "secs": 1 },
+          { "node": 15, "color": "Blue", "secs": 1 },
+          { "node": 16, "color": "Blue", "secs": 1 },
+          { "node": 17, "color": "Blue", "secs": 1 },
+          { "node": 18, "color": "Blue", "secs": 1 }
+        ]
+      },
+      {
+        "phase": 10,
+        "nodes": [
+          { "node": 1, "color": "Black", "secs": 1 },
+          { "node": 2, "color": "Blue", "secs": 1 },
+          { "node": 3, "color": "Blue", "secs": 1 },
+          { "node": 4, "color": "Blue", "secs": 1 },
+          { "node": 5, "color": "Blue", "secs": 1 },
+          { "node": 6, "color": "Blue", "secs": 1 },
+          { "node": 7, "color": "Blue", "secs": 1 },
+          { "node": 8, "color": "Blue", "secs": 1 },
+          { "node": 9, "color": "Blue", "secs": 1 },
+          { "node": 10, "color": "Black", "secs": 1 },
+          { "node": 11, "color": "Blue", "secs": 1 },
+          { "node": 12, "color": "Blue", "secs": 1 },
+          { "node": 13, "color": "Blue", "secs": 1 },
+          { "node": 14, "color": "Blue", "secs": 1 },
+          { "node": 15, "color": "Blue", "secs": 1 },
+          { "node": 16, "color": "Blue", "secs": 1 },
+          { "node": 17, "color": "Blue", "secs": 1 },
+          { "node": 18, "color": "Blue", "secs": 1 }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "_comment": "Blinking FAST",
+    "pattern_14": {
+      "duration": 13,
+      "phases": [
+        {
+          "phase": 1,
+          "nodes": [
+            { "node": 1, "color": "Red", "secs": 2 },
+            { "node": 2, "color": "Red", "secs": 2 },
+            { "node": 3, "color": "Red", "secs": 2 },
+            { "node": 4, "color": "Red", "secs": 2 }
+          ]
+        },
+        {
+          "phase": 2,
+          "nodes": [
+            { "node": 1, "color": "Yellow", "secs": 1 },
+            { "node": 2, "color": "Yellow", "secs": 1 },
+            { "node": 3, "color": "Yellow", "secs": 1 },
+            { "node": 4, "color": "Yellow", "secs": 1 }
+          ]
+        },
+        {
+          "phase": 3,
+          "nodes": [
+            { "node": 1, "color": "Black", "secs": 1 },
+            { "node": 2, "color": "Black", "secs": 1 },
+            { "node": 3, "color": "Black", "secs": 1 },
+            { "node": 4, "color": "Black", "secs": 1 }
+          ]
+        },
+        {
+          "phase": 4,
+          "nodes": [
+            { "node": 1, "color": "Yellow", "secs": 1 },
+            { "node": 2, "color": "Yellow", "secs": 1 },
+            { "node": 3, "color": "Yellow", "secs": 1 },
+            { "node": 4, "color": "Yellow", "secs": 1 }
+          ]
+        }
+      ]
+    }
+  }
+  

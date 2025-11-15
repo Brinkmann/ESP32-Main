@@ -1,0 +1,62 @@
+{
+  "_comment": "this is a comment in JSON",
+  "pattern_10": {
+    "duration": 20,
+    "phases": [
+      {
+        "phase": 1,
+        "nodes": [
+          { "node": 1, "color": "Blue", "secs": 3 },
+          { "node": 3, "color": "Green", "secs": 3 },
+          { "node": 4, "color": "Blue", "secs": 3 },
+          { "node": 5, "color": "Green", "secs": 3 }
+        ]
+      },
+      {
+        "phase": 2,
+        "nodes": [
+          { "node": 1, "color": "Black", "secs": 2 },
+          { "node": 3, "color": "Black", "secs": 2 },
+          { "node": 4, "color": "Black", "secs": 2 },
+          { "node": 5, "color": "Black", "secs": 2 }
+        ]
+      },
+      {
+        "phase": 3,
+        "nodes": [
+          { "node": 1, "color": "Green", "secs": 5 },
+          { "node": 3, "color": "Green", "secs": 5 },
+          { "node": 4, "color": "Green", "secs": 5 },
+          { "node": 5, "color": "Green", "secs": 5 }
+        ]
+      },
+      {
+        "phase": 4,
+        "nodes": [
+          { "node": 1, "color": "DarkBlue", "secs": 5 },
+          { "node": 2, "color": "Red", "secs": 5 },
+          { "node": 3, "color": "Blue", "secs": 5 },
+          { "node": 4, "color": "Green", "secs": 5 }
+        ]
+      },
+      {
+        "phase": 5,
+        "nodes": [
+          { "node": 1, "color": "DeepPink", "secs": 5 },
+          { "node": 2, "color": "Red", "secs": 5 },
+          { "node": 3, "color": "Blue", "secs": 5 },
+          { "node": 4, "color": "Green", "secs": 5 }
+        ]
+      },
+      {
+        "phase": 6,
+        "nodes": [
+          { "node": 1, "color": "LightGreen", "secs": 5 },
+          { "node": 2, "color": "Red", "secs": 5 },
+          { "node": 3, "color": "Blue", "secs": 5 },
+          { "node": 4, "color": "Green", "secs": 5 }
+        ]
+      }
+    ]
+  }
+}

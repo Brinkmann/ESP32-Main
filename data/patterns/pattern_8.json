@@ -1,0 +1,80 @@
+{
+  "_comment": "this is a comment in JSON",
+  "pattern_8": {
+    "duration": 48,
+    "phases": [
+      {
+        "phase": 1,
+        "nodes": [
+          { "node": 1, "color": "Yellow", "secs": 3 },
+          { "node": 2, "color": "Blue", "secs": 4 },
+          { "node": 3, "color": "Red", "secs": 5 }
+        ]
+      },
+      {
+        "phase": 2,
+        "nodes": [
+          { "node": 1, "color": "Yellow", "secs": 3 },
+          { "node": 2, "color": "Blue", "secs": 4 },
+          { "node": 3, "color": "Red", "secs": 5 }
+        ]
+      },
+      {
+        "phase": 3,
+        "nodes": [
+          { "node": 1, "color": "Red", "secs": 3 },
+          { "node": 2, "color": "Yellow", "secs": 4 },
+          { "node": 3, "color": "Blue", "secs": 5 }
+        ]
+      },
+      {
+        "phase": 4,
+        "nodes": [
+          { "node": 1, "color": "Yellow", "secs": 3 },
+          { "node": 2, "color": "Red", "secs": 4 },
+          { "node": 3, "color": "Blue", "secs": 5 }
+        ]
+      },
+      {
+        "phase": 5,
+        "nodes": [
+          { "node": 1, "color": "Red", "secs": 5 },
+          { "node": 2, "color": "Blue", "secs": 4 },
+          { "node": 3, "color": "Yellow", "secs": 5 }
+        ]
+      },
+      {
+        "phase": 6,
+        "nodes": [
+          { "node": 1, "color": "Yellow", "secs": 3 },
+          { "node": 2, "color": "Red", "secs": 5 },
+          { "node": 3, "color": "Blue", "secs": 4 }
+        ]
+      },
+      {
+        "phase": 7,
+        "nodes": [
+          { "node": 1, "color": "Red", "secs": 5 },
+          { "node": 2, "color": "Yellow", "secs": 4 },
+          { "node": 3, "color": "Blue", "secs": 4 }
+        ]
+      },
+      {
+        "phase": 8,
+        "nodes": [
+          { "node": 1, "color": "Yellow", "secs": 3 },
+          { "node": 2, "color": "Red", "secs": 5 },
+          { "node": 3, "color": "Blue", "secs": 4 }
+        ]
+      },
+      {
+        "phase": 9,
+        "nodes": [
+          { "node": 1, "color": "Yellow", "secs": 3 },
+          { "node": 2, "color": "Blue", "secs": 5 },
+          { "node": 3, "color": "Red", "secs": 4 }
+        ]
+      }
+    ]
+  }
+}

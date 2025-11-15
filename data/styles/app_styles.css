@@ -1,0 +1,296 @@
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  display: inline-block;
+  text-align: center;
+  background-color: #282d3a; /* Dark background color */
+  color: #d4d4d4; /* Light text color */
+}
+
+.top-nav {
+  overflow: hidden;
+  background-color: #373d4f;
+  height: 60px;
+  width: 100%;
+  display: flex; /* Add flex container */
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally (optional, if needed) */
+  font-size: 18px;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #373d4f;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0; /* Optional: Add some padding to the buttons for better visual appearance */
+}
+
+#patterns-btn {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  width: 100%; /* Set the width to 100% */
+  transition: background-color 0.6s; /* Add a transition effect for smoother change */
+}
+
+#settings-btn {
+  background-color: #dc2d5d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  width: 100%; /* Set the width to 100% */
+  transition: background-color 0.6s; /* Add a transition effect for smoother change */
+}
+
+#settings-btn:hover {
+  background-color: #101fed;
+}
+
+#settings-btn.active {
+  background-color: #00fff2; /* Add the desired background color when the button is clicked */
+}
+
+#patterns-btn:hover {
+  background-color: #101fed;
+}
+
+#patterns-btn.active {
+  background-color: #00fff2; /* Add the desired background color when the button is clicked */
+}
+
+#table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid #807777;
+}
+
+td {
+  border: 2px solid #f8f8f8;
+  padding: 10px;
+  font-size: 30px;
+  color: whitesmoke;
+}
+
+tr:nth-child(even) {
+  background-color: #242731;
+}
+
+tr:hover {
+  background-color: #1a1a2c;
+}
+
+@media (min-width: 768px) {
+  td:nth-child(2) {
+    width: 30%;
+  }
+}
+
+.slider-toggle {
+  width: 100px; /* Set the desired width */
+  height: 35px; /* Set the desired height */
+  border: 2px solid #817474;
+}
+
+/* Default state (OFF) */
+.slider-toggle {
+  background-color: rgb(186, 13, 13); /* Set the desired OFF color */
+}
+
+/* Checked state (ON) */
+.slider-toggle:checked {
+  background-color: rgb(13, 156, 13); /* Set the desired ON color */
+}
+
+.slider-toggle {
+  /* ... your other styles ... */
+  position: relative;
+  border-radius: 30px; /* Set a value to make it round */
+  transition: background-color 0.7s ease; /* Add a smooth transition effect */
+}
+
+/* Hide the default checkbox */
+.slider-toggle {
+  /* ... your other styles ... */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+}
+
+/* Define the appearance of the slider when it's OFF */
+.slider-toggle::before {
+  content: "OFF"; /* Set the text to be displayed when OFF */
+  position: absolute;
+  left: 10px;
+  color: #c2bebe;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Define the appearance of the slider when it's ON */
+.slider-toggle:checked::before {
+  content: "ON"; /* Set the text to be displayed when ON */
+  content: "ON"; /* Set the text to be displayed when ON */
+  left: auto;
+  right: 10px;
+  color: #050202;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.battery-icon {
+  position: absolute;
+  top: 22px;
+  right: 10px;
+  width: 50px;
+  height: 25px;
+  background-color: #ddd;
+  border: 1px solid #999;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 2px solid #0c0b0b;
+}
+
+.battery-fill {
+  width: 60%;
+  height: 100%;
+  background-color: #4caf50;
+}
+
+.connected-nodes {
+  position: absolute;
+  top: 25px;
+  left: 10px;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+#settings-page {
+  text-align: center;
+}
+
+.menu-settings-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 600px; /* Set the desired fixed width */
+  height: 400px; /* Set the desired fixed height */
+  background-color: #333;
+  border: 1px solid #ffffff;
+  /* Center the container both vertically and horizontally */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#reprov-banner {
+  background-color: #272a33;
+  color: #ffffff;
+  padding: 10px;
+  font-size: larger;
+  width: 100%;
+  text-align: center;
+}
+
+.tab-menu {
+  display: flex;
+  justify-content: space-between;
+  background-color: #333;
+  border: 1px solid #ffffff;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 20px;
+}
+
+.tab {
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 20px;
+  width: 33.3%;
+}
+
+.tab:hover {
+  background-color: #555;
+}
+
+.content {
+  height: 300px;
+  width: 500px;
+  padding: 20px;
+  background-color: #373d4f;
+  border: 1px solid #ffffff;
+}
+
+.tab-content {
+  display: none;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 10px 0;
+}
+
+#device-content {
+  font-size: 26px;
+  color: white;
+  padding-top: 20px;
+}
+
+#patterns-content {
+  font-size: 26px;
+  color: white;
+  padding-top: 20px;
+}
+
+#provisioning-content {
+  font-size: 26px;
+  color: white;
+  padding-top: 20px;
+}
+
+#device-content ul li {
+  margin-bottom: 20px;
+}
+
+#reprovision-button {
+  padding: 8px 16px;
+  background-color: #dc2d5d;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  width: 240px;
+  height: 60px;
+}
+
+#reprovision-button:hover {
+  background-color: #0056b3;
+}

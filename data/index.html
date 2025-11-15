@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FEQ-HUB</title>
+    <link rel="stylesheet" href="styles/app_styles.css" />
+    <link rel="icon" type="image/x-icon" href="assets/app_icon.ico" />
+  </head>
+  <body>
+    <nav class="top-nav">
+      <h1>FootBall Eye Q</h1>
+      <div class="battery-icon">
+        <div class="battery-fill"></div>
+      </div>
+      <div class="connected-nodes">
+        Connected Nodes: <span id="node-count">0</span>
+      </div>
+    </nav>
+    <div id="settings-page">
+      <div class="menu-settings-container">
+        <div class="tab-menu">
+          <div class="tab" id="device-tab">Device Information</div>
+          <div class="tab" id="patterns-tab">Patterns Settings</div>
+          <div class="tab" id="provisioning-tab">Provisioning</div>
+        </div>
+        <div class="content">
+          <div id="device-content" class="tab-content">
+            <ul>
+              <li id="fw-version">FW version: <span>1.0</span></li>
+              <li id="hw-version">HW version: <span>1.2</span></li>
+              <li id="serial-number">Serial number: <span>123456</span></li>
+              <li id="software-version">Software version: <span>2.3</span></li>
+            </ul>
+          </div>
+          <div id="patterns-content" class="tab-content">
+            <p>Patterns description, metadata etc.</p>
+            <p>Add , remove , edit , save Patterns.</p>
+          </div>
+          <div id="provisioning-content" class="tab-content">
+            <p>
+              By performing a reprovisioning procedure on your device, it will
+              return to WiFi Manager mode.
+            </p>
+            <button id="reprovision-button">Reprovision Device</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="patterns-page">
+      <div id="table-container"></div>
+    </div>
+    <nav id="reprov-banner" class="bottom-nav-reprov">
+      your device will be restarted in WiFi Manager mode for reprovisioning.
+    </nav>
+    <nav class="bottom-nav">
+      <button id="patterns-btn" class="nav-button">Patterns</button>
+      <button id="settings-btn" class="nav-button">Settings</button>
+    </nav>
+    <script src="/logic/actions.js"></script>
+  </body>
+</html>
