@@ -10,15 +10,15 @@
 
 
 #if DEVICE_MODE_OPERATION == DEVICE_MODE_CONTROLLER
-
-extern FeqPatterns feqPatterns;
-
+// REMOVED: The global feqPatterns variable is gone.
+// extern FeqPatterns feqPatterns; 
 #endif
 
 
 FileStorage::FileStorage(){
     jsonDoc = new DynamicJsonDocument(12800);
-    memset(&feqPatterns,0,sizeof(feqPatterns));
+    // REMOVED: No longer need to init feqPatterns
+    // memset(&feqPatterns,0,sizeof(feqPatterns)); 
     credentials.pwrdLength = 0;
     credentials.ssidLength = 0;
 }
@@ -49,29 +49,9 @@ String FileStorage::readFileTxt(fs::FS &fs, const char * path){
   return fileContent;
 }
 
-bool FileStorage::isPatternFileNameValid(const char* name){
-
-    const char* patternPrefix = "pattern_";
-    const char* jsonSuffix = ".json";
-    const uint8_t maxFileNameLenght = 16;
-
-    return ( strstr(name, patternPrefix)       && 
-             strlen(name) <= maxFileNameLenght &&
-             strstr(name, jsonSuffix));
-
-}
-
-uint8_t FileStorage::validatePatternFile(const char* fileName){
-    const uint8_t maxPatternsSupport = 16;
-    if(isPatternFileNameValid(fileName)){
-        uint8_t patternIndex = atoi(&fileName[8]);
-        if(patternIndex <= maxPatternsSupport){
-            return patternIndex;
-        }
-    }
-    log_e("Invalid pattern file name.");
-    return 0xFF;
-}
+// REMOVED: These functions are no longer needed
+// bool FileStorage::isPatternFileNameValid(const char* name){ ... }
+// uint8_t FileStorage::validatePatternFile(const char* fileName){ ... }
 
 CRGB FileStorage::mapColourNameToColour(const char* colorName){
 
@@ -83,10 +63,10 @@ CRGB FileStorage::mapColourNameToColour(const char* colorName){
     if (strcmp(colorName, "DarkBlue") == 0) return CRGB::DarkBlue;
     if (strcmp(colorName, "Magenta") == 0) return CRGB::Magenta;
     if (strcmp(colorName, "Tomato") == 0) return CRGB::Tomato;
-    /**
-     * @brief Extra colours added for completion.
-     * 
-     */
+    if (strcmp(colorName, "Black") == 0) return CRGB::Black;
+    // ... (rest of the color map)
+    
+    // Add other colors here
     if (strcmp(colorName, "AliceBlue") == 0) return CRGB::AliceBlue;
     if (strcmp(colorName, "Amethyst") == 0) return CRGB::Amethyst;
     if (strcmp(colorName, "AntiqueWhite") == 0) return CRGB::AntiqueWhite;
@@ -95,9 +75,7 @@ CRGB FileStorage::mapColourNameToColour(const char* colorName){
     if (strcmp(colorName, "Azure") == 0) return CRGB::Azure;
     if (strcmp(colorName, "Beige") == 0) return CRGB::Beige;
     if (strcmp(colorName, "Bisque") == 0) return CRGB::Bisque;
-    if (strcmp(colorName, "Black") == 0) return CRGB::Black;
     if (strcmp(colorName, "BlanchedAlmond") == 0) return CRGB::BlanchedAlmond;
-    if (strcmp(colorName, "Blue") == 0) return CRGB::Blue;
     if (strcmp(colorName, "BlueViolet") == 0) return CRGB::BlueViolet;
     if (strcmp(colorName, "Brown") == 0) return CRGB::Brown;
     if (strcmp(colorName, "BurlyWood") == 0) return CRGB::BurlyWood;
@@ -109,7 +87,6 @@ CRGB FileStorage::mapColourNameToColour(const char* colorName){
     if (strcmp(colorName, "Cornsilk") == 0) return CRGB::Cornsilk;
     if (strcmp(colorName, "Crimson") == 0) return CRGB::Crimson;
     if (strcmp(colorName, "Cyan") == 0) return CRGB::Cyan;
-    if (strcmp(colorName, "DarkBlue") == 0) return CRGB::DarkBlue;
     if (strcmp(colorName, "DarkCyan") == 0) return CRGB::DarkCyan;
     if (strcmp(colorName, "DarkGoldenrod") == 0) return CRGB::DarkGoldenrod;
     if (strcmp(colorName, "DarkGray") == 0) return CRGB::DarkGray;
@@ -143,7 +120,6 @@ CRGB FileStorage::mapColourNameToColour(const char* colorName){
     if (strcmp(colorName, "Goldenrod") == 0) return CRGB::Goldenrod;
     if (strcmp(colorName, "Gray") == 0) return CRGB::Gray;
     if (strcmp(colorName, "Grey") == 0) return CRGB::Grey;
-    if (strcmp(colorName, "Green") == 0) return CRGB::Green;
     if (strcmp(colorName, "GreenYellow") == 0) return CRGB::GreenYellow;
     if (strcmp(colorName, "Honeydew") == 0) return CRGB::Honeydew;
     if (strcmp(colorName, "HotPink") == 0) return CRGB::HotPink;
@@ -172,7 +148,6 @@ CRGB FileStorage::mapColourNameToColour(const char* colorName){
     if (strcmp(colorName, "Lime") == 0) return CRGB::Lime;
     if (strcmp(colorName, "LimeGreen") == 0) return CRGB::LimeGreen;
     if (strcmp(colorName, "Linen") == 0) return CRGB::Linen;
-    if (strcmp(colorName, "Magenta") == 0) return CRGB::Magenta;
     if (strcmp(colorName, "Maroon") == 0) return CRGB::Maroon;
     if (strcmp(colorName, "MediumAquamarine") == 0) return CRGB::MediumAquamarine;
     if (strcmp(colorName, "MediumBlue") == 0) return CRGB::MediumBlue;
@@ -206,8 +181,6 @@ CRGB FileStorage::mapColourNameToColour(const char* colorName){
     if (strcmp(colorName, "Plaid") == 0) return CRGB::Plaid;
     if (strcmp(colorName, "Plum") == 0) return CRGB::Plum;
     if (strcmp(colorName, "PowderBlue") == 0) return CRGB::PowderBlue;
-    if (strcmp(colorName, "Purple") == 0) return CRGB::Purple;
-    if (strcmp(colorName, "Red") == 0) return CRGB::Red;
     if (strcmp(colorName, "RosyBrown") == 0) return CRGB::RosyBrown;
     if (strcmp(colorName, "RoyalBlue") == 0) return CRGB::RoyalBlue;
     if (strcmp(colorName, "SaddleBrown") == 0) return CRGB::SaddleBrown;
@@ -227,22 +200,24 @@ CRGB FileStorage::mapColourNameToColour(const char* colorName){
     if (strcmp(colorName, "Tan") == 0) return CRGB::Tan;
     if (strcmp(colorName, "Teal") == 0) return CRGB::Teal;
     if (strcmp(colorName, "Thistle") == 0) return CRGB::Thistle;
-    if (strcmp(colorName, "Tomato") == 0) return CRGB::Tomato;
     if (strcmp(colorName, "Turquoise") == 0) return CRGB::Turquoise;
     if (strcmp(colorName, "Violet") == 0) return CRGB::Violet;
     if (strcmp(colorName, "Wheat") == 0) return CRGB::Wheat;
     if (strcmp(colorName, "White") == 0) return CRGB::White;
     if (strcmp(colorName, "WhiteSmoke") == 0) return CRGB::WhiteSmoke;
-    if (strcmp(colorName, "Yellow") == 0) return CRGB::Yellow;
     if (strcmp(colorName, "YellowGreen") == 0) return CRGB::YellowGreen;
     if (strcmp(colorName, "FairyLight") == 0) return CRGB::FairyLight;
     if (strcmp(colorName,"FairyLightNCC") == 0) return CRGB::FairyLightNCC;
 
     return CRGB::Black;
-
 }
 
-void FileStorage::populateSystemPatterns(uint8_t patternIndex, File& file){
+/**
+ * @brief This function is modified. It no longer iterates a directory.
+ * It now parses a *single* pattern file into a SystemPattern struct
+ * that was allocated by the caller.
+ */
+void FileStorage::populateSystemPattern(SystemPattern* systemPattern, File& file){
 
     //StaticJsonDocument<6000> jsonDoc;
     DeserializationError error = deserializeJson(*jsonDoc, file);
@@ -251,11 +226,14 @@ void FileStorage::populateSystemPatterns(uint8_t patternIndex, File& file){
         file.close();
         return;
     }
-    SystemPattern* systemPattern = &feqPatterns.patterns[patternIndex];
-    feqPatterns.patternsCount ++;
+    
     JsonObject root = (*jsonDoc).as<JsonObject>();
     for (JsonObject::iterator it = root.begin(); it != root.end(); ++it) {
         const char* rootKey = it->key().c_str();
+        
+        // Ignore "_comment" keys
+        if(strcmp(rootKey, "_comment") == 0) continue;
+
         systemPattern->nameLength = strlen(rootKey) + 1;
         memcpy(systemPattern->name,rootKey,systemPattern->nameLength);
         log_d("Iterate through: %s , length %d",rootKey,systemPattern->nameLength);
@@ -267,6 +245,11 @@ void FileStorage::populateSystemPatterns(uint8_t patternIndex, File& file){
             JsonArray phasesArray = patternObj["phases"].as<JsonArray>();
             systemPattern->phasesCount = 0;
             for (JsonVariant phaseVar : phasesArray) {
+                // Ensure we don't overflow
+                if (systemPattern->phasesCount >= PATTERN_PHASES_MAX_N) {
+                    log_e("Pattern %s has more phases than PATTERN_PHASES_MAX_N", rootKey);
+                    break;
+                }
                 PatternPhase* phase = &systemPattern->phases[systemPattern->phasesCount++];
                 JsonObject phaseObj = phaseVar.as<JsonObject>();
                 phase->index = phaseObj["phase"] | 0;
@@ -274,6 +257,11 @@ void FileStorage::populateSystemPatterns(uint8_t patternIndex, File& file){
                 JsonArray actionsArray = phaseObj["nodes"];
                 phase->nodeCount = 0;
                 for (JsonVariant actionVar : actionsArray) {
+                    // Ensure we don't overflow
+                    if (phase->nodeCount >= PATTERN_NODE_ACTIONS_MAX_N) {
+                        log_e("Phase %d has more nodes than PATTERN_NODE_ACTIONS_MAX_N", phase->index);
+                        break;
+                    }
                     JsonObject actionObj = actionVar.as<JsonObject>();
                     NodeAction* action = &phase->actions[phase->nodeCount++];
                     const char* colour = actionObj["color"];
@@ -287,34 +275,68 @@ void FileStorage::populateSystemPatterns(uint8_t patternIndex, File& file){
                         action->duration);
                 }
             }
-            break;
+            break; // Found and processed the first valid pattern, exit loop
         }
     }
 }
 
-void FileStorage::extractPatternsData(File& file){
-    const char* fileName = file.name();
-    log_d("Found Pattern JSON file: %s",fileName);
-    uint8_t patternIndex = validatePatternFile(fileName);
-    if(patternIndex != 0xFF){
-        populateSystemPatterns(patternIndex-1,file);
+// REMOVED: extractPatternsData is no longer needed
+// void FileStorage::extractPatternsData(File& file){ ... }
+
+// REMOVED: readFilesPatterns is no longer needed
+// void FileStorage::readFilesPatterns(void){ ... }
+
+
+/**
+ * @brief ADDED: New function to load a single pattern from SPIFFS
+ * dynamically.
+ */
+SystemPattern* FileStorage::loadPatternFromFile(uint8_t patternId) {
+    char filePath[40]; // Increased size
+    sprintf(filePath, "%s/pattern_%d.json", FILES_PATTERNS_PATH, patternId);
+    
+    log_i("Loading pattern: %s", filePath);
+    
+    File file = SPIFFS.open(filePath, "r");
+    if (!file) {
+        log_e("Failed to open pattern file: %s", filePath);
+        // Requirement 4: Fallback
+        // We return nullptr, the caller (LedStrip) will handle this.
+        return nullptr;
+    }
+
+    // Allocate memory for the pattern.
+    // Using 'new' is fine, especially with PSRAM enabled.
+    SystemPattern* pattern = new SystemPattern();
+    if (!pattern) {
+        log_e("Failed to allocate memory for SystemPattern!");
+        file.close();
+        return nullptr;
+    }
+    
+    // Clear the allocated memory
+    memset(pattern, 0, sizeof(SystemPattern));
+
+    // Populate the struct from the file
+    populateSystemPattern(pattern, file);
+    
+    file.close();
+
+    log_i("Successfully loaded pattern %d", patternId);
+    return pattern;
+}
+
+/**
+ * @brief ADDED: New function to free the dynamically allocated pattern.
+ */
+void FileStorage::freePattern(SystemPattern* pattern) {
+    if (pattern != nullptr) {
+        log_d("Freeing pattern %s from memory", pattern->name);
+        delete pattern;
+        pattern = nullptr;
     }
 }
 
-void FileStorage::readFilesPatterns(void){
-    log_d("Reading Patterns Files.");
-    File pattersnDir = SPIFFS.open(FILES_PATTERNS_PATH);
-    if(!pattersnDir){
-        log_e("Unable to open patterns directory. ");
-        return;
-    }
-    File file = pattersnDir.openNextFile();
-    while(file){
-        extractPatternsData(file);
-        file = pattersnDir.openNextFile();
-    }
-    pattersnDir.close();
-}
 
 void FileStorage::readFileCredentials(void){
 

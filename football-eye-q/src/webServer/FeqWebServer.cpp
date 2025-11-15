@@ -10,6 +10,9 @@
 #include "../SystemSettings.h"
 #include "../storage/FileStorage.h"
 
+// REMOVED: SessionManager.h is no longer needed
+// #include "../SessionManager.h" 
+
 #if DEVICE_MODE_OPERATION == DEVICE_MODE_CONTROLLER
 
 IPAddress localIPServer(192, 168, 4, 1);
@@ -20,10 +23,6 @@ FeqWebServer::FeqWebServer(){}
 
 extern volatile LedPatternAttributes ledPatternStrip;
 
-
-extern FeqPatterns feqPatterns;
-
-
 static uint8_t stationsConnected = 0;
 
 void stationConnectedCallbackFeqServer(WiFiEvent_t event, WiFiEventInfo_t inf){
@@ -31,9 +30,7 @@ void stationConnectedCallbackFeqServer(WiFiEvent_t event, WiFiEventInfo_t inf){
 }
 
 bool resetCredentials(void){
-
     return device->fileStorage->resetCredentials(SPIFFS);
-
 }
 
 void FeqWebServer::init(CredentialsType* cred){
@@ -55,13 +52,15 @@ void FeqWebServer::init(CredentialsType* cred){
 
     WiFi.onEvent(stationConnectedCallbackFeqServer,ARDUINO_EVENT_WIFI_AP_STACONNECTED);
 
-
+    // REMOVED: The GET /patterns endpoint is no longer needed
+    /*
     serverFeq.on("/patterns", HTTP_GET, [](AsyncWebServerRequest *request){
-        log_i("Serving number of patterns : %d",feqPatterns.patternsCount);
+        log_i("Serving number of patterns : 29");
         char response[50];
-        sprintf(response,"Found=%d Patterns in system.",feqPatterns.patternsCount);
+        sprintf(response,"Found=29 Patterns in system.");
         request->send(200, "text/plain", response);
     });
+    */
 
     serverFeq.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
         request->send(SPIFFS, "/index.html", "text/html");
@@ -70,10 +69,10 @@ void FeqWebServer::init(CredentialsType* cred){
     serverFeq.on(
         "/patterns",
         HTTP_POST,
-        [](AsyncWebServerRequest * request){
-        },
+        [](AsyncWebServerRequest * request){},
             NULL,
         [](AsyncWebServerRequest * request, uint8_t *data, size_t len, size_t index, size_t total) {
+            
             char jsonBuffer[1024];
             size_t jsonLen = 0;
             if (jsonLen + len < sizeof(jsonBuffer) - 1) {
@@ -97,16 +96,29 @@ void FeqWebServer::init(CredentialsType* cred){
                     const int pattern = jsonData["pattern"];
                     const bool state  = jsonData["state"];
                     log_d("Pattern request for: number = %d , state = %d",pattern,state);
-                    ledPatternStrip.patternActive = pattern - 1;
+                    
+                    // SIMPLIFIED: We just set the global vars.
+                    // The LedStrip task handles the rest.
+                    ledPatternStrip.patternActive = pattern; 
                     ledPatternStrip.state = state;
                     ledPatternStrip.receivedUpdate = true;
                 }
             }
     });
 
+    // REMOVED: The POST /session endpoint is gone.
+    /*
+    serverFeq.on(
+        "/session",
+        HTTP_POST,
+        ...
+    );
+    */
+
     serverFeq.on(
         "/reprovision",
         HTTP_POST,
+        // ... (this handler is unchanged)
         [](AsyncWebServerRequest * request){
         },
             NULL,
@@ -153,7 +165,6 @@ void FeqWebServer::init(CredentialsType* cred){
 
     serverFeq.serveStatic("/", SPIFFS, "/");
     serverFeq.begin();
-
 }
 
 #endif

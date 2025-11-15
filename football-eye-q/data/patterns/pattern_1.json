@@ -6,18 +6,18 @@
       {
         "phase": 1,
         "nodes": [
-          { "node": 1, "color": "Magenta", "secs": 4 },
-          { "node": 2, "color": "Black", "secs": 4 },
-          { "node": 3, "color": "Blue", "secs": 5 },
-          { "node": 4, "color": "Black", "secs": 4 },
-          { "node": 5, "color": "Black", "secs": 6 },
-          { "node": 6, "color": "Black", "secs": 4 }
+          { "node": 1, "color": "Plum", "secs": 4 },
+          { "node": 15, "color": "Magenta", "secs": 4 },
+          { "node": 16, "color": "Magenta", "secs": 5 },
+          { "node": 17, "color": "Magenta", "secs": 4 },
+          { "node": 18, "color": "Magenta", "secs": 6 },
+          { "node": 6, "color": "Magenta", "secs": 4 }
         ]
       },
       {
         "phase": 2,
         "nodes": [
-          { "node": 1, "color": "Black", "secs": 5 },
+          { "node": 1, "color": "Azure", "secs": 5 },
           { "node": 2, "color": "Blue", "secs": 4 },
           { "node": 3, "color": "Black", "secs": 5 },
           { "node": 4, "color": "Black", "secs": 6 },
@@ -28,7 +28,7 @@
       {
         "phase": 3,
         "nodes": [
-          { "node": 1, "color": "Blue", "secs": 6 },
+          { "node": 1, "color": "Lime", "secs": 6 },
           { "node": 2, "color": "Black", "secs": 5 },
           { "node": 3, "color": "Black", "secs": 5 },
           { "node": 4, "color": "Black", "secs": 4 },

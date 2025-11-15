@@ -5,7 +5,7 @@
       {
         "phase": 1,
         "nodes": [
-          { "node": 1, "color": "Red", "secs": 3 },
+          { "node": 1, "color": "Magenta", "secs": 3 },
           { "node": 15, "color": "Green", "secs": 3 },
           { "node": 16, "color": "Blue", "secs": 3 },
           { "node": 17, "color": "Yellow", "secs": 3 },

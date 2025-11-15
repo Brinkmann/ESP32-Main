@@ -2,36 +2,25 @@
 #include "../SystemTypes.h"
 #include "../DeviceModel.h"
 #include "../commands/feqCmdProcessor.h"
+// REMOVED: SessionManager.h
+// #include "../SessionManager.h" 
 
 CRGB leds[RGB_LED_STRIP_NUMBER_OF_LEDS];
 
-/**
- * @note Assuming Led Strip task interval is 100 milliseconds. 
- * 
- */
 #ifndef THREAD_TIME_MULTIPLIER_SECONDS
 #define THREAD_TIME_MULTIPLIER_SECONDS 10
 #endif
 
 CRGB colorsAvailable[] = {
-
-    CRGB::Red,    
-    CRGB::Green,  
-    CRGB::Blue,   
-    CRGB::Yellow,  
-    CRGB::Purple,
-    CRGB::DarkBlue, 
-    CRGB::Magenta,
-    CRGB::Tomato,
-
+    CRGB::Red, CRGB::Green, CRGB::Blue, CRGB::Yellow, CRGB::Purple, 
+    CRGB::DarkBlue, CRGB::Magenta, CRGB::Tomato,
 };
 
-volatile LedPatternAttributes ledPatternStrip;
 
+volatile LedPatternAttributes ledPatternStrip;
 volatile LedNodeUpdateAttributes ledUpdateNode;
 
 static void displayLedStripStartUp(void){
-
   uint8_t colorsCount = sizeof(colorsAvailable)/sizeof(CRGB);
   for(uint8_t l = 0; l < RGB_LED_STRIP_NUMBER_OF_LEDS; l ++){
       leds[l] = colorsAvailable[0];
@@ -42,21 +31,18 @@ static void displayLedStripStartUp(void){
       leds[l] = CRGB::Black;
       FastLED.show();
   }
-
 }
 
+// This is the function definition that was pasted in the wrong place
 static void fillStrip(const CRGB colour){
-
   for(uint8_t k = 0; k < RGB_LED_STRIP_NUMBER_OF_LEDS; k ++){
     leds[k] = colour;
     FastLED.show();
   }
-
 }
 
-
+// This is the function that I broke. It is now fixed.
 const char* colorToName(const CRGB color){
-
   if(CRGB::Red == color) return "Red";
   if(CRGB::Green == color) return "Green";
   if(CRGB::Blue == color) return "Blue";
@@ -65,10 +51,7 @@ const char* colorToName(const CRGB color){
   if(CRGB::DarkBlue == color) return "DarkBlue";
   if(CRGB::Magenta == color) return "Magenta";
   if(CRGB::Tomato == color) return "Tomato";
-  /**
-   * @brief Extra colours added for completion
-   * 
-   */
+  if (color == CRGB::Black) return "Black";
   if (color == CRGB::AliceBlue) return "AliceBlue";
     if (color == CRGB::Amethyst) return "Amethyst";
     if (color == CRGB::AntiqueWhite) return "AntiqueWhite";
@@ -77,9 +60,7 @@ const char* colorToName(const CRGB color){
     if (color == CRGB::Azure) return "Azure";
     if (color == CRGB::Beige) return "Beige";
     if (color == CRGB::Bisque) return "Bisque";
-    if (color == CRGB::Black) return "Black";
     if (color == CRGB::BlanchedAlmond) return "BlanchedAlmond";
-    if (color == CRGB::Blue) return "Blue";
     if (color == CRGB::BlueViolet) return "BlueViolet";
     if (color == CRGB::Brown) return "Brown";
     if (color == CRGB::BurlyWood) return "BurlyWood";
@@ -91,7 +72,6 @@ const char* colorToName(const CRGB color){
     if (color == CRGB::Cornsilk) return "Cornsilk";
     if (color == CRGB::Crimson) return "Crimson";
     if (color == CRGB::Cyan) return "Cyan";
-    if (color == CRGB::DarkBlue) return "DarkBlue";
     if (color == CRGB::DarkCyan) return "DarkCyan";
     if (color == CRGB::DarkGoldenrod) return "DarkGoldenrod";
     if (color == CRGB::DarkGray) return "DarkGray";
@@ -125,7 +105,6 @@ const char* colorToName(const CRGB color){
     if (color == CRGB::Goldenrod) return "Goldenrod";
     if (color == CRGB::Gray) return "Gray";
     if (color == CRGB::Grey) return "Grey";
-    if (color == CRGB::Green) return "Green";
     if (color == CRGB::GreenYellow) return "GreenYellow";
     if (color == CRGB::Honeydew) return "Honeydew";
     if (color == CRGB::HotPink) return "HotPink";
@@ -154,7 +133,6 @@ const char* colorToName(const CRGB color){
     if (color == CRGB::Lime) return "Lime";
     if (color == CRGB::LimeGreen) return "LimeGreen";
     if (color == CRGB::Linen) return "Linen";
-    if (color == CRGB::Magenta) return "Magenta";
     if (color == CRGB::Maroon) return "Maroon";
     if (color == CRGB::MediumAquamarine) return "MediumAquamarine";
     if (color == CRGB::MediumBlue) return "MediumBlue";
@@ -188,8 +166,6 @@ const char* colorToName(const CRGB color){
     if (color == CRGB::Plaid) return "Plaid";
     if (color == CRGB::Plum) return "Plum";
     if (color == CRGB::PowderBlue) return "PowderBlue";
-    if (color == CRGB::Purple) return "Purple";
-    if (color == CRGB::Red) return "Red";
     if (color == CRGB::RosyBrown) return "RosyBrown";
     if (color == CRGB::RoyalBlue) return "RoyalBlue";
     if (color == CRGB::SaddleBrown) return "SaddleBrown";
@@ -209,121 +185,133 @@ const char* colorToName(const CRGB color){
     if (color == CRGB::Tan) return "Tan";
     if (color == CRGB::Teal) return "Teal";
     if (color == CRGB::Thistle) return "Thistle";
-    if (color == CRGB::Tomato) return "Tomato";
     if (color == CRGB::Turquoise) return "Turquoise";
     if (color == CRGB::Violet) return "Violet";
     if (color == CRGB::Wheat) return "Wheat";
     if (color == CRGB::White) return "White";
     if (color == CRGB::WhiteSmoke) return "WhiteSmoke";
-    if (color == CRGB::Yellow) return "Yellow";
     if (color == CRGB::YellowGreen) return "YellowGreen";
     if (color == CRGB::FairyLight) return "FairyLight";
     if (color == CRGB::FairyLightNCC) return "FairyLightNCC";
 
     return "Unknown";
-
 }
 
-#if DEVICE_MODE_OPERATION == DEVICE_MODE_CONTROLLER
 
-/**
- * @brief Device controller mode execution, 
- *        for LED strup specific tasks.
- * 
- */
+#if DEVICE_MODE_OPERATION == DEVICE_MODE_CONTROLLER
 
 #ifndef LED_STRIP_TASK_SLEEP_MS_CONTROLLER
 #define LED_STRIP_TASK_SLEEP_MS_CONTROLLER 100
 #endif
 
 typedef struct NodeActionExecution{
-
   uint32_t durationMs;
   CRGB colour;
   uint8_t phase;
   uint8_t node; 
-
+  bool finished; 
 } NodeActionExecution;
 
 typedef struct PatternExecution{
-
   uint8_t nodesInPattern;
   uint8_t phasesInPattern;
   uint32_t cycleDuration;
   uint8_t patternActive;
   bool running;
   NodeActionExecution runners[PATTERN_NODE_ACTIONS_MAX_N];
-
 } PatternExecution;
 
 typedef struct NodeScanningProcess{
-
   uint32_t timeOut;
   uint8_t nodesFound;
-
 } NodeScanningProcess;
 
 static PatternExecution pEx = {0};
-const SystemPattern* pt;
-const PatternPhase* ph;
-FeqPatterns feqPatterns;
+SystemPattern* pt = nullptr; 
+const PatternPhase* ph = nullptr;
 NodeScanningProcess nodeScanning; 
 
 extern void meshNetworkSendPacket(BinaryPacket*, uint8_t);
 
-static void displayPatternInformation(uint8_t patternIndex){
+static SystemPattern* currentLoadedPattern = nullptr;
 
-  if(patternIndex > feqPatterns.patternsCount){
-    log_e("Invalid pattern index = %d",patternIndex);
-    return;
-  }
-  const SystemPattern* const pattern = &feqPatterns.patterns[patternIndex];
-  log_i("Pattern duration : %d , name = %s , phases =%d",
-        pattern->duration, pattern->name,pattern->phasesCount);
-  for(uint8_t k = 0; k < pattern->phasesCount; k++){
-    const PatternPhase* const phase = &pattern->phases[k];
-    log_i("Feautres for phase : %d -> node count -> %d , index -> %d",
-          k,phase->nodeCount,phase->index);
-    for(uint8_t node = 0; node < phase->nodeCount; ++node){
-      const NodeAction* const action = &phase->actions[node];
-      log_i("node %d , Duration = %d , Colour = 0x%04X , %s",
-              action->index,action->duration,
-              action->colour,colorToName(action->colour));
+static bool loadPattern(uint8_t patternId) {
+    if (currentLoadedPattern != nullptr) {
+        device->fileStorage->freePattern(currentLoadedPattern);
+        currentLoadedPattern = nullptr;
     }
-  }
 
+    currentLoadedPattern = device->fileStorage->loadPatternFromFile(patternId);
+    pt = currentLoadedPattern;
+
+    if (pt == nullptr) {
+        log_e("Pattern %d failed to load!", patternId);
+        fillStrip(CRGB::Red); 
+        vTaskDelay(pdMS_TO_TICKS(500));
+        fillStrip(CRGB::Black);
+        return false;
+    }
+    return true;
 }
 
-static void displayPatternsAvailable(void){
+static void initPatternExecution() {
+    if (pt == nullptr) return;
 
-  vTaskDelay(pdMS_TO_TICKS(500));
-  log_i("System patterns found = %d",feqPatterns.patternsCount);
-  for(uint8_t k = 0; k < feqPatterns.patternsCount; k ++){
-    const SystemPattern* const pattern = &feqPatterns.patterns[k];
-    log_d("name: %s , duration: %d Secs , phasesCount %d",
-        pattern->name,
-        pattern->duration,
-        pattern->phasesCount);
-  }
+    memset(&pEx, 0, sizeof(pEx)); 
+    
+    pEx.running = true;
+    pEx.patternActive = ledPatternStrip.patternActive;
+    pEx.nodesInPattern = (pt->phasesCount > 0) ? pt->phases[0].nodeCount : 0;
+    pEx.phasesInPattern = pt->phasesCount;
+    
+    log_d("Initializing pattern execution for '%s', phases %d , nodes: %d",
+          pt->name, pEx.phasesInPattern, pEx.nodesInPattern);
 
+    if(pEx.phasesInPattern > 0) {
+        static const uint8_t startingPhase = 0;
+        ph = &pt->phases[startingPhase];
+        for(uint8_t k = 0; k < pEx.nodesInPattern; ++k){
+            pEx.runners[k].colour = ph->actions[k].colour;
+            pEx.runners[k].durationMs = ph->actions[k].duration * THREAD_TIME_MULTIPLIER_SECONDS;
+            pEx.runners[k].node   = ph->actions[k].index - 1;
+            pEx.runners[k].phase  = startingPhase+1;
+            pEx.runners[k].finished = false;
+            
+            log_d("Start Node %d , %s for %d seconds",
+                  pEx.runners[k].node,
+                  colorToName(pEx.runners[k].colour),
+                  pEx.runners[k].durationMs/THREAD_TIME_MULTIPLIER_SECONDS);
+            
+            if(pEx.runners[k].node == 0){
+                fillStrip(pEx.runners[k].colour);
+            }
+            else{
+                FeqCmd cmd;
+                cmd.id = FEQ_CMD_FILL_STRIP;
+                FeqCmdFillStrip* fillCmd = &cmd.context.fill;
+                uint8_t data[255] = {0};
+                BinaryPacket bin = { .data = data, .length = 0 };
+                fillCmd->colour = pEx.runners[k].colour;
+                fillCmd->delayToSart = CMD_DELAY_TO_START_FILL_DEFAULT;
+                fillCmd->fillType    = CMD_FILL_TYPE_DEFAULT;
+                fillCmd->pattern     = CMD_PATTERN_TYPE_DEFAULT;
+                FeqCmdProcessor::encodeCmd(&cmd,&bin);
+                meshNetworkSendPacket(&bin,pEx.runners[k].node);
+            }
+        }
+    }
 }
 
-static const SystemPattern* getCurrentPattern(uint8_t index){
-  return &feqPatterns.patterns[index];
-}
 
 static bool checkForPatternUpdates(void){
-
   if(ledPatternStrip.receivedUpdate){
     ledPatternStrip.receivedUpdate = false;
     return true;
   }
   return false;
-
 }
 
 static void clearAllNodesOnStartUp(void){
-
   FeqCmd cmd;
   cmd.id = FEQ_CMD_CLEAR_STRIP;
   FeqCmdClearStrip* clearCmd = &cmd.context.clear;
@@ -336,75 +324,54 @@ static void clearAllNodesOnStartUp(void){
   clearCmd->delayToClear = 0x00;
   FeqCmdProcessor::encodeCmd(&cmd,&bin);
   meshNetworkSendPacket(&bin,FEQ_CMD_TARGET_BROADCAST);
-
 }
 
+static bool isCurrentPatternFinished() {
+    if (!pEx.running) return true;
+    for (uint8_t i = 0; i < pEx.nodesInPattern; i++) {
+        if (!pEx.runners[i].finished) {
+            return false;
+        }
+    }
+    return true; 
+}
 
 static void evaluateStripState(void){
-
-  if(checkForPatternUpdates()){
-    clearAllNodesOnStartUp();
-    pt = getCurrentPattern(ledPatternStrip.patternActive);
-    pEx.patternActive = ledPatternStrip.patternActive;
-    pEx.running = ledPatternStrip.state;
-    pEx.nodesInPattern = pt->phases[0].nodeCount;
-    pEx.phasesInPattern = pt->phasesCount;
-    log_d("Rx to start with pattern %d , state %s ,phases %d , nodes: %d",
-          pEx.patternActive,
-          (pEx.running)?"ON":"OFF" ,
-          pEx.phasesInPattern, 
-          pEx.nodesInPattern);
-    if(pEx.running){
-      static const uint8_t startingPhase = 0;
-      ph = &pt->phases[startingPhase];
-      for(uint8_t k = 0; k < pEx.nodesInPattern; ++k){
-        pEx.runners[k].colour = ph->actions[k].colour;
-        pEx.runners[k].durationMs = ph->actions[k].duration * THREAD_TIME_MULTIPLIER_SECONDS;
-        pEx.runners[k].node   = ph->actions[k].index - 1;
-        pEx.runners[k].phase  = startingPhase+1;
-        log_d("Start Node %d , %s for %d seconds",
-              pEx.runners[k].node,
-              colorToName(pEx.runners[k].colour),
-              pEx.runners[k].durationMs/THREAD_TIME_MULTIPLIER_SECONDS);
-        if(pEx.runners[k].node == 0){
-          fillStrip(pEx.runners[k].colour);
-        }
-        else{
-            FeqCmd cmd;
-            cmd.id = FEQ_CMD_FILL_STRIP;
-            FeqCmdFillStrip* fillCmd = &cmd.context.fill;
-            uint8_t data[255] = {0};
-            BinaryPacket bin = {
-              .data = data,
-              .length = 0,
-            };
-            fillCmd->colour = pEx.runners[k].colour;
-            fillCmd->delayToSart = CMD_DELAY_TO_START_FILL_DEFAULT;
-            fillCmd->fillType    = CMD_FILL_TYPE_DEFAULT;
-            fillCmd->pattern     = CMD_PATTERN_TYPE_DEFAULT;
-            FeqCmdProcessor::encodeCmd(&cmd,&bin);
-            meshNetworkSendPacket(&bin,pEx.runners[k].node);
-        }
-      }
-    }
-    else{
-      log_d("Clear all nodes, received commands to turn pattern off.");
-      fillStrip(CRGB::Black);
-      clearAllNodesOnStartUp();
-    }
-  }
-  if(pEx.running){
+  
+  if(pEx.running && pt != nullptr){ 
 
     for(uint8_t node = 0; node < pEx.nodesInPattern; ++node){
 
+      if (pEx.runners[node].finished) continue;
+
       if(--pEx.runners[node].durationMs == 0){
+        
+        if(pEx.runners[node].phase >= pEx.phasesInPattern){
+          log_i("Node %d has finished its last phase.", pEx.runners[node].node);
+          pEx.runners[node].finished = true;
+          continue; 
+        }
 
         ph = &pt->phases[pEx.runners[node].phase++];
-        pEx.runners[node].durationMs = 
-            ( ph->actions[node].duration * THREAD_TIME_MULTIPLIER_SECONDS);
-        pEx.runners[node].colour = ph->actions[node].colour;
+        
+        const NodeAction* action = nullptr;
+        for (uint8_t i = 0; i < ph->nodeCount; i++) {
+            if (ph->actions[i].index == pEx.runners[node].node + 1) {
+                action = &(ph->actions[i]);
+                break;
+            }
+        }
 
-        if(node == 0){
+        if (action == nullptr) {
+            log_e("Could not find action for node %d in phase %d!", pEx.runners[node].node + 1, pEx.runners[node].phase);
+            pEx.runners[node].finished = true;
+            continue;
+        }
+
+        pEx.runners[node].durationMs = (action->duration * THREAD_TIME_MULTIPLIER_SECONDS);
+        pEx.runners[node].colour = action->colour;
+
+        if(pEx.runners[node].node == 0){ 
           fillStrip(pEx.runners[node].colour);
         }
         else{
@@ -412,10 +379,7 @@ static void evaluateStripState(void){
             cmd.id = FEQ_CMD_FILL_STRIP;
             FeqCmdFillStrip* fillCmd = &cmd.context.fill;
             uint8_t data[255] = {0};
-            BinaryPacket bin = {
-              .data = data,
-              .length = 0,
-            };
+            BinaryPacket bin = { .data = data, .length = 0 };
             fillCmd->colour = pEx.runners[node].colour;
             fillCmd->delayToSart = CMD_DELAY_TO_START_FILL_DEFAULT;
             fillCmd->fillType    = CMD_FILL_TYPE_DEFAULT;
@@ -423,24 +387,16 @@ static void evaluateStripState(void){
             FeqCmdProcessor::encodeCmd(&cmd,&bin);
             meshNetworkSendPacket(&bin,pEx.runners[node].node);
         }
-        if(pEx.runners[node].phase >= pEx.phasesInPattern){
-          pEx.runners[node].phase = 0;
-        }
-
       }
-
     }
   }
 }
 
 static bool isNodeScanningDue(void){
-
   return((nodeScanning.timeOut++ % 202) == 0);
-
 }
 
 static void sendNodesPingRequest(void){
-
   FeqCmd cmd;
   cmd.id = FEQ_CMD_PING_REQUEST;
   FeqCmdPingRequest* pingReq = &cmd.context.pingReq;
@@ -452,46 +408,67 @@ static void sendNodesPingRequest(void){
   pingReq->reqType = 0x00;
   FeqCmdProcessor::encodeCmd(&cmd,&bin);
   meshNetworkSendPacket(&bin,FEQ_CMD_TARGET_BROADCAST);
-
 }
 
 void ledStripTask(void *pvParameters){
-
-  displayPatternsAvailable();
+  
   displayLedStripStartUp();
   clearAllNodesOnStartUp();
   ledPatternStrip.receivedUpdate = false;
   nodeScanning.timeOut = 200;
   nodeScanning.nodesFound = 0;
   log_i("FEQ Led strip controller mode , is ready to receive commands. ");
+  
   while(true){
 
-    evaluateStripState();
     if(isNodeScanningDue()){
       sendNodesPingRequest();
     }
-    vTaskDelay(pdMS_TO_TICKS(LED_STRIP_TASK_SLEEP_MS_CONTROLLER));
 
+    if (checkForPatternUpdates()) {
+        clearAllNodesOnStartUp(); 
+        
+        if (ledPatternStrip.state) {
+            if (loadPattern(ledPatternStrip.patternActive)) {
+                initPatternExecution(); 
+            }
+        } else {
+            if (currentLoadedPattern != nullptr) {
+                device->fileStorage->freePattern(currentLoadedPattern);
+                currentLoadedPattern = nullptr;
+                pt = nullptr;
+            }
+            memset(&pEx, 0, sizeof(pEx));
+            fillStrip(CRGB::Black); 
+        }
+    }
+
+    if (pEx.running && currentLoadedPattern != nullptr) {
+        evaluateStripState();
+        
+        if (isCurrentPatternFinished()) {
+            log_d("Looping pattern %s", currentLoadedPattern->name);
+            initPatternExecution();
+        }
+    }
+
+    vTaskDelay(pdMS_TO_TICKS(LED_STRIP_TASK_SLEEP_MS_CONTROLLER));
   }
 }
 
 LedStrip::LedStrip(){}
 
 void LedStrip::init(void){
-
     FastLED.addLeds<WS2813, 
                     RGB_LED_STRIP_DATA_PIN_PRIMARY, 
                     GRB>(leds, RGB_LED_STRIP_NUMBER_OF_LEDS);
     FastLED.setBrightness(SYSTEM_LED_BRIGHTNESS_DEFAULT);
-    xTaskCreate(ledStripTask, "ledStripTask",20000, NULL, 1, NULL);
-
+    xTaskCreate(ledStripTask, "ledStripTask", 24000, NULL, 1, NULL); 
 }
 
 #else
 /**
- * @brief Device node mode execution, 
- *        for LED strup specific tasks.
- * 
+ * @brief Device node mode execution (UNCHANGED)
  */
 #ifndef LED_STRIP_TASK_SLEEP_MS_NODE
 #define LED_STRIP_TASK_SLEEP_MS_NODE 50
