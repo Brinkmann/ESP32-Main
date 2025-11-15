@@ -154,32 +154,7 @@ tr:hover {
   font-weight: bold;
 }
 
-.battery-icon {
-  position: absolute;
-  top: 22px;
-  right: 10px;
-  width: 50px;
-  height: 25px;
-  background-color: #ddd;
-  border: 1px solid #999;
-  border-radius: 5px;
-  overflow: hidden;
-  border: 2px solid #0c0b0b;
-}
 
-.battery-fill {
-  width: 60%;
-  height: 100%;
-  background-color: #4caf50;
-}
-
-.connected-nodes {
-  position: absolute;
-  top: 25px;
-  left: 10px;
-  font-size: 14px;
-  font-weight: normal;
-}
 
 #settings-page {
   text-align: center;
@@ -349,4 +324,47 @@ li {
 }
 #new-session-btn:hover {
   background-color: #b21d42;
+}
+/* ... (all existing styles) ... */
+
+/* Add this new block at the end of the file */
+@media (max-width: 600px) {
+  /* Makes the main containers 95% wide on small screens */
+  .menu-settings-container {
+    width: 95%;
+    height: auto; /* Allow height to be flexible */
+    padding: 10px;
+  }
+
+  .content {
+    width: 100%;
+    padding: 10px;
+  }
+
+  /* Makes table text smaller on phones */
+  td {
+    font-size: 20px; 
+    padding: 8px;
+  }
+}
+/* ... (all your existing styles) ... */
+
+/* ADD THIS NEW BLOCK AT THE END 
+*/
+
+.test-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #373d4f;
+  border: 1px solid #807777;
+  border-radius: 8px;
+  margin: 20px;
+}
+
+.test-button-container label {
+  font-size: 24px;
+  color: whitesmoke;
+  margin-right: 20px;
 }

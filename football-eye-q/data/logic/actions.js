@@ -2,7 +2,6 @@
 const sessionPage = document.getElementById("session-page");
 const settingsPage = document.getElementById("settings-page");
 const patternsPage = document.getElementById("patterns-page");
-const nodeCountSpan = document.getElementById("node-count");
 const reprovBanner = document.getElementById("reprov-banner");
 const tableContainer = document.getElementById("table-container");
 
@@ -11,6 +10,10 @@ const patternsBtn = document.getElementById("patterns-btn");
 const settingsBtn = document.getElementById("settings-btn");
 const sessionSubmitBtn = document.getElementById("session-submit-btn");
 const newSessionBtn = document.getElementById("new-session-btn");
+
+// ADD THIS LINE
+const testNetworkToggle = document.getElementById("test-network-toggle");
+
 
 // Get session input elements
 const sessionCodeInput = document.getElementById("session-code-input");
@@ -25,6 +28,10 @@ patternsBtn.addEventListener("click", onPatternsPressed);
 settingsBtn.addEventListener("click", onSettingsPressed);
 sessionSubmitBtn.addEventListener("click", onSessionSubmit);
 newSessionBtn.addEventListener("click", onNewSession);
+
+// ADD THIS LISTENER
+testNetworkToggle.addEventListener("click", () => handleSliderToggleChange(testNetworkToggle, 99, undefined));
+
 
 // --- Initialization ---
 
@@ -66,7 +73,13 @@ function onSettingsPressed() {
 function onNewSession() {
   // Stop any active pattern
   if (activePattern !== null) {
-      handleSliderToggleChange(document.getElementById(`pattern${activePattern}`), activePattern, false);
+      // Find the correct slider to turn off
+      const activeSlider = (activePattern === 99) 
+                            ? testNetworkToggle 
+                            : document.getElementById(`pattern${activePattern}`);
+      if (activeSlider) {
+          handleSliderToggleChange(activeSlider, activePattern, false); // Force OFF
+      }
   }
   
   // Clear the table
@@ -86,6 +99,12 @@ function onNewSession() {
 
 function onSessionSubmit() {
   const code = sessionCodeInput.value;
+
+  // ADD THIS CHECK
+  if (testNetworkToggle.checked) {
+      sessionErrorText.textContent = "Please stop the Network Test first.";
+      return;
+  }
   
   // Validate the code
   if (code.length < 2 || code.length > 10 || code.length % 2 !== 0 || !/^\d+$/.test(code)) {
@@ -96,7 +115,6 @@ function onSessionSubmit() {
   sessionErrorText.textContent = "";
   
   // Parse the code into pattern IDs
-  // "012536" -> ["01", "25", "36"]
   const patternIds = code.match(/.{1,2}/g) || [];
   
   // Convert to numbers
@@ -123,7 +141,7 @@ function createPatternsTable(patternNumbers) {
 
   // Create a row for each pattern ID
   patternNumbers.forEach(patternId => {
-    // Req 2: Discard IDs outside 1-29
+    // Discard IDs outside 1-29
     if (patternId < 1 || patternId > 29) {
         console.warn(`Invalid pattern ID ${patternId} discarded.`);
         return;
@@ -133,7 +151,7 @@ function createPatternsTable(patternNumbers) {
   });
   
   if (table.rows.length === 0) {
-    // Req 2: All IDs were invalid
+    // All IDs were invalid
     onNewSession(); // Go back to session page
     sessionErrorText.textContent = "Error: Session code contains no valid patterns (1-29).";
     return;
@@ -163,24 +181,24 @@ function createSliderToggleSwitch(rowNumber) {
   slider.className = "slider-toggle";
   slider.id = `pattern${rowNumber}`;
   
-  // We pass 'undefined' for 'forceState' so it reads from the slider
   slider.addEventListener("click", () => handleSliderToggleChange(slider, rowNumber, undefined));
   return slider;
 }
 
-// forceState is used to turn off a pattern when loading a new session
+// MODIFIED FUNCTION
 function handleSliderToggleChange(slider, rowNumber, forceState) {
-  // Use the forced state if provided, otherwise read from the slider
   const isChecked = (forceState !== undefined) ? forceState : slider.checked;
   
-  // Update the slider's visual state
   slider.checked = isChecked;
 
   if (isChecked) {
     // A pattern is turned ON
     // If another pattern is already active, turn it OFF first
     if (activePattern !== null && activePattern !== rowNumber) {
-      const previousActiveSlider = document.getElementById(`pattern${activePattern}`);
+      // Check if the other pattern is a playlist pattern
+      const previousActiveSlider = (activePattern === 99)
+                                    ? testNetworkToggle
+                                    : document.getElementById(`pattern${activePattern}`);
       if (previousActiveSlider) {
           handleSliderToggleChange(previousActiveSlider, activePattern, false); // Force OFF
       }
@@ -188,10 +206,11 @@ function handleSliderToggleChange(slider, rowNumber, forceState) {
     // Set the new active pattern
     activePattern = rowNumber;
     console.log(`Pattern ${rowNumber} is ON`);
+
   } else {
     // A pattern is turned OFF
     if (activePattern === rowNumber) {
-      activePattern = null; // No pattern is active now
+      activePattern = null; 
     }
     console.log(`Pattern ${rowNumber} is OFF`);
   }
@@ -251,7 +270,6 @@ document
       patternsPage.style.display = "none";
       patternsBtn.style.display = "none";
       settingsBtn.style.display = "none";
-      nodeCountSpan.style.display = "none";
       reprovBanner.style.display = "block";
       const data = {
         reprov: "reprovision",
@@ -275,25 +293,6 @@ document
     }
   });
 
-
-// --- Node Count Simulation (Unchanged) ---
-
-function updateNodeCount(count) {
-  nodeCountSpan.textContent = count;
-}
-
-let connectedSimulated = 18;
-
-function simulateRandomNodeChanges() {
-  const randomNodeCount = connectedSimulated;
-  updateNodeCount(randomNodeCount);
-  connectedSimulated--;
-  if (connectedSimulated < 0) {
-    connectedSimulated = 18;
-  }
-}
-
-setInterval(simulateRandomNodeChanges, 1000);
 
 // --- START THE APP ---
 initIndexPage();
