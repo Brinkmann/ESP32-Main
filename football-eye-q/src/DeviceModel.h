@@ -6,6 +6,9 @@
 #include "ledStrip/LedStrip.h"
 #include "meshNetwork/MeshNetwork.h"
 
+// REMOVED: No longer need the SessionManager header
+// #include "SessionManager.h" 
+
 
 #ifndef DEVICE_MODE_CONTROLLER
 #define DEVICE_MODE_CONTROLLER 0
@@ -30,6 +33,10 @@ typedef struct FeqDeviceModelType{
     LedStrip* ledStrip;
     WiFiManager* wifiManager;
     MeshNetwork* network;
+    
+    // REMOVED: The session manager pointer is gone
+    // SessionManager* sessionManager; 
+
     uint8_t mac[FEQ_DEVICE_MAC_LENGTH];
     uint8_t meshId;
     bool provisioned; 

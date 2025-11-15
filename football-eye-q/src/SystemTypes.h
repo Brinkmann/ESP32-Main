@@ -6,8 +6,7 @@
 
 /**
  * @note Credentials constant settings.
- * 
- */
+ * */
 #ifndef SSID_PLACE_HOLDER_STR
 #define SSID_PLACE_HOLDER_STR "PlaceHolderSSID"
 #endif 
@@ -42,10 +41,7 @@ typedef struct CredentialsType{
 #define PATTERN_NODE_ACTIONS_MAX_N 32
 #endif
 
-#ifndef PATTERNS_MAX_SUPPORTED_N
-#define PATTERNS_MAX_SUPPORTED_N 32
-#endif
-
+// This is kept
 typedef struct NodeAction{
 
     uint8_t index;
@@ -54,6 +50,7 @@ typedef struct NodeAction{
 
 } NodeAction;
 
+// This is kept
 typedef struct PatternPhase{
 
     NodeAction actions[PATTERN_NODE_ACTIONS_MAX_N];
@@ -62,6 +59,7 @@ typedef struct PatternPhase{
 
 } PatternPhase;
 
+// This is kept
 typedef struct SystemPattern{
 
     char name[PATTERN_NAME_MAX_LENGTH];
@@ -72,11 +70,7 @@ typedef struct SystemPattern{
 
 } SystemPattern;
 
-typedef struct FeqPatterns{
+// REMOVED: FeqPatterns struct is gone.
+// This was the struct holding all patterns in RAM.
 
-    SystemPattern patterns[PATTERNS_MAX_SUPPORTED_N];
-    uint8_t patternsCount; 
-
-} FeqPatterns;
-
-#endif 
+#endif

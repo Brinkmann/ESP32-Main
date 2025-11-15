@@ -294,3 +294,59 @@ li {
 #reprovision-button:hover {
   background-color: #0056b3;
 }
+/* ... (all your existing styles) ... */
+
+/* ADD THESE NEW STYLES AT THE END 
+*/
+
+#session-page {
+  text-align: center;
+}
+
+.session-input-group {
+  margin-bottom: 20px;
+}
+
+#session-code-input {
+  padding: 15px;
+  width: 80%;
+  max-width: 300px;
+  font-size: 24px;
+  text-align: center;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+}
+
+#session-submit-btn {
+  padding: 15px 30px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  border-radius: 8px;
+}
+
+#session-submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.session-error-text {
+  color: #ff5370;
+  font-size: 18px;
+  height: 20px; /* Reserve space */
+}
+
+#new-session-btn {
+  background-color: #dc2d5d;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 8px;
+  margin: 20px;
+}
+#new-session-btn:hover {
+  background-color: #b21d42;
+}
