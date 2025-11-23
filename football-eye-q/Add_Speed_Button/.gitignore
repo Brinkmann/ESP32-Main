@@ -1,0 +1,42 @@
+# Arduino/ESP32 build artifacts
+build/
+*.bin
+*.elf
+*.hex
+*.map
+*.dSYM/
+*.pio/
+.pio*
+
+# PlatformIO
+.pio
+.pioenvs
+.piolibdeps
+.clang_complete
+.gcc-flags.json
+
+# Arduino IDE
+*.cpp.hex
+*.eep
+*.lst
+*.lss
+*.sym
+*.eep.hex
+*.partitions.bin
+*.partitions.csv
+
+# Web tooling
+node_modules/
+dist/
+build/
+coverage/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.log
+*.swp
+*.swo
+.idea/
+.vscode/
+*.iml
