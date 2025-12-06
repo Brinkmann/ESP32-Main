@@ -1,4 +1,4 @@
-# Football Eye Q firmware
+# Football EyeQ firmware
 
 ## Description
 
@@ -60,6 +60,26 @@ List the main features of your project, such as:
 - From tools open tools and click on ESP32 Skecth data upload, this will flash the WEB server files on to the file system on the ESP32S3, the blue led on the dev board should be lit blue while flashing.
 - Once that is completed upload the applciation from the arduino IDE upload button.
 - To verify that programming succeded open the serial port of the device and chekc the logs as it should be displaying the logs in Wi-Fi Manager mode.
+
+## Preview the web UI locally
+
+You can quickly serve the `football-eye-q/data` folder to exercise the session-code input flow on your laptop before flashing to the device:
+
+```bash
+cd football-eye-q/data
+npx http-server -p 8000 .
+```
+
+Then open http://localhost:8000/ in your browser. Use this when testing both 6-character encoded session codes (e.g., `0fkc03`, `4bn9sk`, `aoqfku`) and the legacy numeric codes (`0102030405`, `05`).
+
+If you need to sync to the latest remote branch that contains the session code changes before serving, run:
+
+```bash
+cd /path/to/ESP32-Main
+git fetch origin
+git checkout <branch-name>
+git pull origin <branch-name>
+```
 
 # DeviceModes
 
