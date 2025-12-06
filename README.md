@@ -72,6 +72,15 @@ npx http-server -p 8000 .
 
 Then open http://localhost:8000/ in your browser. Use this when testing both 6-character encoded session codes (e.g., `0fkc03`, `4bn9sk`, `aoqfku`) and the legacy numeric codes (`0102030405`, `05`).
 
+If you need to sync to the latest remote branch that contains the session code changes before serving, run:
+
+```bash
+cd /path/to/ESP32-Main
+git fetch origin
+git checkout codex/add-base-36-session-code-decoding
+git pull origin codex/add-base-36-session-code-decoding
+```
+
 # DeviceModes
 
 Since the source code for both node and controller devices is contained within this repo, in order to programmatically switch between node and controller mode, refer to DeviceModel.h where setting the DEVICE_MODE_OPERATION definition will set the appropriate code for each mode, note that the project needs to be recompiled when switching between modes, **also when the device is a node the file system upload step does not need to be performed.**
