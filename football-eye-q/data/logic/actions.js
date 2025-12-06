@@ -11,7 +11,6 @@ const settingsBtn = document.getElementById("settings-btn");
 const sessionSubmitBtn = document.getElementById("session-submit-btn");
 const newSessionBtn = document.getElementById("new-session-btn");
 
-// ADD THIS LINE
 const testNetworkToggle = document.getElementById("test-network-toggle");
 
 
@@ -79,7 +78,6 @@ settingsBtn.addEventListener("click", onSettingsPressed);
 sessionSubmitBtn.addEventListener("click", onSessionSubmit);
 newSessionBtn.addEventListener("click", onNewSession);
 
-// ADD THIS LISTENER
 testNetworkToggle.addEventListener("click", () => handleSliderToggleChange(testNetworkToggle, 99, undefined));
 
 
@@ -151,7 +149,6 @@ function onSessionSubmit() {
   const rawInput = sessionCodeInput.value.trim();
   const code = rawInput.toLowerCase();
 
-  // ADD THIS CHECK
   if (testNetworkToggle.checked) {
       sessionErrorText.textContent = "Please stop the Network Test first.";
       return;
@@ -205,8 +202,8 @@ function createPatternsTable(patternNumbers) {
 
   // Create a row for each pattern ID
   patternNumbers.forEach(patternId => {
-    // Discard IDs outside 1-29
-    if (patternId < 1 || patternId > 29) {
+    // Discard IDs outside 1-70 (base-71 encoded range)
+    if (patternId < 1 || patternId > 70) {
         console.warn(`Invalid pattern ID ${patternId} discarded.`);
         return;
     }
@@ -217,7 +214,7 @@ function createPatternsTable(patternNumbers) {
   if (table.rows.length === 0) {
     // All IDs were invalid
     onNewSession(); // Go back to session page
-    sessionErrorText.textContent = "Error: Session code contains no valid patterns (1-29).";
+    sessionErrorText.textContent = "Error: Session code contains no valid patterns (1-70).";
     return;
   }
 
@@ -249,7 +246,6 @@ function createSliderToggleSwitch(rowNumber) {
   return slider;
 }
 
-// MODIFIED FUNCTION
 function handleSliderToggleChange(slider, rowNumber, forceState) {
   const isChecked = (forceState !== undefined) ? forceState : slider.checked;
   
