@@ -61,6 +61,25 @@ List the main features of your project, such as:
 - Once that is completed upload the applciation from the arduino IDE upload button.
 - To verify that programming succeded open the serial port of the device and chekc the logs as it should be displaying the logs in Wi-Fi Manager mode.
 
+## Preview the web UI locally
+
+You can quickly serve the `football-eye-q/data` folder to exercise the session-code input flow on your laptop before flashing to the device. Use either Python or a small Node-based static server:
+
+- **Python 3 (built-in on macOS/Linux):**
+  ```bash
+  cd football-eye-q/data
+  python3 -m http.server 8000
+  ```
+
+- **Node.js (if Python is unavailable on your platform):**
+  ```bash
+  cd football-eye-q/data
+  npx http-server -p 8000 .
+  # or: npx serve -p 8000 .
+  ```
+
+Then open http://localhost:8000/ in your browser. Use this when testing both 6-character encoded session codes (e.g., `0fkc03`, `4bn9sk`, `aoqfku`) and the legacy numeric codes (`0102030405`, `05`).
+
 # DeviceModes
 
 Since the source code for both node and controller devices is contained within this repo, in order to programmatically switch between node and controller mode, refer to DeviceModel.h where setting the DEVICE_MODE_OPERATION definition will set the appropriate code for each mode, note that the project needs to be recompiled when switching between modes, **also when the device is a node the file system upload step does not need to be performed.**
