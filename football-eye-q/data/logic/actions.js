@@ -19,6 +19,56 @@ const testNetworkToggle = document.getElementById("test-network-toggle");
 const sessionCodeInput = document.getElementById("session-code-input");
 const sessionErrorText = document.getElementById("session-error");
 
+// --- Session code decoding helpers ---
+const BASE36_ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyz";
+const BASE71_POWERS = [25411681, 357911, 5041, 71, 1]; // 71^4 .. 71^0 (most significant first)
+
+function isBase36SessionCode(code) {
+  return code.length === 6 && /^[0-9a-z]{6}$/.test(code);
+}
+
+function decodeBase36SessionCode(code) {
+  let value = 0;
+  for (let i = 0; i < code.length; i++) {
+    const digit = BASE36_ALPHABET.indexOf(code[i]);
+    if (digit < 0) {
+      return { success: false, error: "Error: Code must use 0-9 or a-z." };
+    }
+    value = value * 36 + digit;
+  }
+
+  const digits = [];
+  let remaining = value;
+  for (let i = 0; i < BASE71_POWERS.length; i++) {
+    const divisor = BASE71_POWERS[i];
+    const di = Math.floor(remaining / divisor); // extract most significant first
+    remaining -= di * divisor;
+    if (di < 0 || di > 70) {
+      return { success: false, error: "Error: Invalid encoded session." };
+    }
+    digits.push(di);
+  }
+
+  while (digits.length && digits[digits.length - 1] === 0) {
+    digits.pop();
+  }
+
+  if (digits.length === 0) {
+    return { success: false, error: "Error: Session code decodes to empty playlist." };
+  }
+
+  if (digits.some((d) => d === 0)) {
+    return { success: false, error: "Error: Session code contains invalid zero." };
+  }
+
+  const decodedString = digits.map((d) => d.toString().padStart(2, "0")).join("");
+  return { success: true, decodedString };
+}
+
+function isValidDecodedPatternString(code) {
+  return code.length >= 2 && code.length <= 10 && code.length % 2 === 0 && /^\d+$/.test(code);
+}
+
 const table = document.createElement("table");
 let activePattern = null;
 
@@ -98,31 +148,45 @@ function onNewSession() {
 // --- Core Session Logic ---
 
 function onSessionSubmit() {
-  const code = sessionCodeInput.value;
+  const rawInput = sessionCodeInput.value.trim();
+  const code = rawInput.toLowerCase();
 
   // ADD THIS CHECK
   if (testNetworkToggle.checked) {
       sessionErrorText.textContent = "Please stop the Network Test first.";
       return;
   }
-  
-  // Validate the code
-  if (code.length < 2 || code.length > 10 || code.length % 2 !== 0 || !/^\d+$/.test(code)) {
-    sessionErrorText.textContent = "Error: Code must be 2, 4, 6, 8, or 10 digits.";
+
+  let decodedString = "";
+
+  if (isBase36SessionCode(code)) {
+    const decoded = decodeBase36SessionCode(code);
+    if (!decoded.success) {
+      sessionErrorText.textContent = decoded.error;
+      return;
+    }
+    decodedString = decoded.decodedString;
+  } else {
+    if (!isValidDecodedPatternString(code)) {
+      sessionErrorText.textContent = "Error: Code must be 2, 4, 6, 8, or 10 digits.";
+      return;
+    }
+    decodedString = code;
+  }
+
+  sessionErrorText.textContent = "";
+
+  const patternIds = decodedString.match(/.{1,2}/g) || [];
+  const patternNumbers = patternIds.map((id) => parseInt(id, 10));
+
+  if (patternNumbers.some((id) => id === 0)) {
+    sessionErrorText.textContent = "Error: Session code contains invalid pattern 00.";
     return;
   }
-  
-  sessionErrorText.textContent = "";
-  
-  // Parse the code into pattern IDs
-  const patternIds = code.match(/.{1,2}/g) || [];
-  
-  // Convert to numbers
-  const patternNumbers = patternIds.map(id => parseInt(id, 10));
-  
+
   // Build the table with these patterns
   createPatternsTable(patternNumbers);
-  
+
   // Show the patterns page and nav buttons
   showPage(patternsPage);
   patternsBtn.style.display = "block";
@@ -295,4 +359,20 @@ document
 
 
 // --- START THE APP ---
+function runSessionDecoderSelfTest() {
+  const samples = [
+    { code: "0fkc03", expected: "0102030405" },
+    { code: "4bn9sk", expected: "102030" },
+    { code: "aoqfku", expected: "253035" },
+  ];
+
+  samples.forEach((sample) => {
+    const decoded = decodeBase36SessionCode(sample.code);
+    if (!decoded.success || decoded.decodedString !== sample.expected) {
+      console.warn(`Session decode self-test failed for ${sample.code}`);
+    }
+  });
+}
+
+runSessionDecoderSelfTest();
 initIndexPage();
