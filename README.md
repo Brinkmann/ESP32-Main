@@ -77,8 +77,8 @@ If you need to sync to the latest remote branch that contains the session code c
 ```bash
 cd /path/to/ESP32-Main
 git fetch origin
-git checkout codex/add-base-36-session-code-decoding
-git pull origin codex/add-base-36-session-code-decoding
+git checkout <branch-name>
+git pull origin <branch-name>
 ```
 
 # DeviceModes
