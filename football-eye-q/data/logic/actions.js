@@ -75,7 +75,7 @@ function getSpeedDescription(multiplier) {
   if (Math.abs(multiplier - 0.5) < 0.001) return "Slower";
   if (Math.abs(multiplier - 1.0) < 0.001) return "Standard";
   if (Math.abs(multiplier - 1.5) < 0.001) return "Faster";
-  if (Math.abs(multiplier - 2.0) < 0.001) return "Very fast";
+  if (Math.abs(multiplier - 2.0) < 0.001) return "Very Fast";
   return "Custom";
 }
 
@@ -89,7 +89,7 @@ function setSelectedSpeedMultiplier(multiplier) {
   });
   if (speedFeedback) {
     const descriptor = getSpeedDescription(multiplier);
-    speedFeedback.textContent = `${multiplier.toFixed(1)} = ${descriptor}`;
+    speedFeedback.textContent = `Speed: ${descriptor}`;
   }
 }
 
