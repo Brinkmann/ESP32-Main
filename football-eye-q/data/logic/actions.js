@@ -5,6 +5,7 @@ const patternsPage = document.getElementById("patterns-page");
 const reprovBanner = document.getElementById("reprov-banner");
 const tableContainer = document.getElementById("table-container");
 const speedButtons = document.querySelectorAll(".speed-button");
+const speedFeedback = document.getElementById("speed-feedback");
 
 // Get all buttons
 const patternsBtn = document.getElementById("patterns-btn");
@@ -78,9 +79,14 @@ const DEFAULT_SPEED_MULTIPLIER = 1.0;
 function setSelectedSpeedMultiplier(multiplier) {
   selectedSpeedMultiplier = multiplier;
   speedButtons.forEach((btn) => {
-    const matchesSelected = parseFloat(btn.dataset.speed) === multiplier;
+    const btnSpeed = parseFloat(btn.dataset.speed);
+    const matchesSelected = Math.abs(btnSpeed - multiplier) < 0.001;
     btn.classList.toggle("active", matchesSelected);
+    btn.setAttribute("aria-pressed", matchesSelected ? "true" : "false");
   });
+  if (speedFeedback) {
+    speedFeedback.textContent = `Speed: ${multiplier.toFixed(1)}x`;
+  }
 }
 
 function resetSpeedSelection() {
@@ -334,6 +340,9 @@ function handleSliderToggleChange(slider, rowNumber, forceState) {
     })
     .catch((error) => {
       console.error("Error:", error);
+      if (speedFeedback) {
+        speedFeedback.textContent = "Speed update pending (device unreachable)";
+      }
     });
 }
 

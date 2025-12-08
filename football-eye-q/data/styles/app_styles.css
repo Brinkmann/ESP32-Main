@@ -402,3 +402,9 @@ li {
   border-color: #2196f3;
   color: #ffffff;
 }
+
+.speed-feedback {
+  margin-top: 10px;
+  color: #d4d4d4;
+  font-size: 16px;
+}
