@@ -385,19 +385,20 @@ li {
 .speed-button {
   padding: 12px 0;
   font-size: 18px;
-  background-color: #373d4f;
-  color: #ffffff;
-  border: 1px solid #807777;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #b0b0b0;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .speed-button:hover {
-  background-color: #4a5266;
+  background-color: #e6e6e6;
 }
 
 .speed-button.active {
   background-color: #2196f3;
   border-color: #2196f3;
+  color: #ffffff;
 }
