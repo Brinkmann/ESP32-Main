@@ -1,15 +1,10 @@
 // Get all page elements
 const sessionPage = document.getElementById("session-page");
-const settingsPage = document.getElementById("settings-page");
 const patternsPage = document.getElementById("patterns-page");
-const reprovBanner = document.getElementById("reprov-banner");
 const tableContainer = document.getElementById("table-container");
 let speedButtons = [];
 let speedFeedback = null;
 
-// Get all buttons
-const patternsBtn = document.getElementById("patterns-btn");
-const settingsBtn = document.getElementById("settings-btn");
 const sessionSubmitBtn = document.getElementById("session-submit-btn");
 const newSessionBtn = document.getElementById("new-session-btn");
 
@@ -94,7 +89,7 @@ function setSelectedSpeedMultiplier(multiplier) {
   });
   if (speedFeedback) {
     const descriptor = getSpeedDescription(multiplier);
-    speedFeedback.textContent = `Speed: ${multiplier.toFixed(1)}x (${descriptor})`;
+    speedFeedback.textContent = `${multiplier.toFixed(1)} = ${descriptor}`;
   }
 }
 
@@ -133,8 +128,6 @@ function initSpeedControls() {
 
 // --- Event Listeners ---
 
-patternsBtn.addEventListener("click", onPatternsPressed);
-settingsBtn.addEventListener("click", onSettingsPressed);
 sessionSubmitBtn.addEventListener("click", onSessionSubmit);
 newSessionBtn.addEventListener("click", onNewSession);
 
@@ -148,12 +141,6 @@ function initIndexPage() {
   // Show the session page by default, hide the others
   sessionPage.style.display = "block";
   patternsPage.style.display = "none";
-  settingsPage.style.display = "none";
-  reprovBanner.style.display = "none";
-
-  // Hide the nav buttons until a session is loaded
-  patternsBtn.style.display = "none";
-  settingsBtn.style.display = "none";
 }
 
 // --- Page Navigation ---
@@ -162,20 +149,9 @@ function showPage(pageToShow) {
   // Hide all main pages
   sessionPage.style.display = "none";
   patternsPage.style.display = "none";
-  settingsPage.style.display = "none";
-  
+
   // Show the requested one
   pageToShow.style.display = "block";
-}
-
-function onPatternsPressed() {
-  showPage(patternsPage);
-  console.log("Show Playlist Page");
-}
-
-function onSettingsPressed() {
-  showPage(settingsPage);
-  console.log("Show Settings Page");
 }
 
 function onNewSession() {
@@ -194,11 +170,9 @@ function onNewSession() {
   while (table.rows.length > 0) {
     table.deleteRow(0);
   }
-  
+
   // Show session entry, hide nav buttons
   showPage(sessionPage);
-  patternsBtn.style.display = "none";
-  settingsBtn.style.display = "none";
   sessionCodeInput.value = "";
   sessionErrorText.textContent = "";
 }
@@ -244,10 +218,8 @@ function onSessionSubmit() {
   // Build the table with these patterns
   createPatternsTable(patternNumbers);
 
-  // Show the patterns page and nav buttons
+  // Show the patterns page
   showPage(patternsPage);
-  patternsBtn.style.display = "block";
-  settingsBtn.style.display = "block";
 }
 
 // --- Table and Pattern Logic ---
@@ -365,63 +337,6 @@ function handleSliderToggleChange(slider, rowNumber, forceState) {
       }
     });
 }
-
-
-// --- Settings Page Logic (Unchanged) ---
-
-document.addEventListener("DOMContentLoaded", function () {
-  const tabs = document.querySelectorAll(".tab");
-  const tabContents = document.querySelectorAll(".tab-content");
-
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", function () {
-      tabs.forEach((t) => t.classList.remove("active"));
-      tab.classList.add("active");
-
-      tabContents.forEach((content) => (content.style.display = "none"));
-      const targetContentId = tab
-        .getAttribute("id")
-        .replace("-tab", "-content");
-      const targetContent = document.getElementById(targetContentId);
-      targetContent.style.display = "block";
-    });
-  });
-});
-
-document
-  .getElementById("reprovision-button")
-  .addEventListener("click", function () {
-    var confirmation = confirm(
-      "Are you sure you want to reprovision your device ?"
-    );
-    if (confirmation) {
-      alert("Your device will be restarted in WiFi Manaager Mode.");
-      settingsPage.style.display = "none";
-      patternsPage.style.display = "none";
-      patternsBtn.style.display = "none";
-      settingsBtn.style.display = "none";
-      reprovBanner.style.display = "block";
-      const data = {
-        reprov: "reprovision",
-      };
-      fetch("/reprovision", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-        .then((response) => response.text())
-        .then((message) => {
-          console.log(message);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    } else {
-      alert("Reprovisioning your device has been cancelled.");
-    }
-  });
 
 
 // --- START THE APP ---

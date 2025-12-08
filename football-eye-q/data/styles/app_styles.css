@@ -17,56 +17,6 @@ html {
   font-size: 18px;
 }
 
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #373d4f;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px 0; /* Optional: Add some padding to the buttons for better visual appearance */
-}
-
-#patterns-btn {
-  background-color: #2196f3;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 20px;
-  cursor: pointer;
-  width: 100%; /* Set the width to 100% */
-  transition: background-color 0.6s; /* Add a transition effect for smoother change */
-}
-
-#settings-btn {
-  background-color: #dc2d5d;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 20px;
-  cursor: pointer;
-  width: 100%; /* Set the width to 100% */
-  transition: background-color 0.6s; /* Add a transition effect for smoother change */
-}
-
-#settings-btn:hover {
-  background-color: #101fed;
-}
-
-#settings-btn.active {
-  background-color: #00fff2; /* Add the desired background color when the button is clicked */
-}
-
-#patterns-btn:hover {
-  background-color: #101fed;
-}
-
-#patterns-btn.active {
-  background-color: #00fff2; /* Add the desired background color when the button is clicked */
-}
-
 #table-container {
   display: flex;
   justify-content: center;
@@ -156,10 +106,6 @@ tr:hover {
 
 
 
-#settings-page {
-  text-align: center;
-}
-
 .menu-settings-container {
   display: flex;
   flex-direction: column;
@@ -176,99 +122,6 @@ tr:hover {
   transform: translate(-50%, -50%);
 }
 
-#reprov-banner {
-  background-color: #272a33;
-  color: #ffffff;
-  padding: 10px;
-  font-size: larger;
-  width: 100%;
-  text-align: center;
-}
-
-.tab-menu {
-  display: flex;
-  justify-content: space-between;
-  background-color: #333;
-  border: 1px solid #ffffff;
-  width: 100%;
-  padding: 10px 0;
-  font-size: 20px;
-}
-
-.tab {
-  color: white;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  font-size: 20px;
-  width: 33.3%;
-}
-
-.tab:hover {
-  background-color: #555;
-}
-
-.content {
-  height: 300px;
-  width: 500px;
-  padding: 20px;
-  background-color: #373d4f;
-  border: 1px solid #ffffff;
-}
-
-.tab-content {
-  display: none;
-}
-
-h2 {
-  margin-top: 0;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  margin: 10px 0;
-}
-
-#device-content {
-  font-size: 26px;
-  color: white;
-  padding-top: 20px;
-}
-
-#patterns-content {
-  font-size: 26px;
-  color: white;
-  padding-top: 20px;
-}
-
-#provisioning-content {
-  font-size: 26px;
-  color: white;
-  padding-top: 20px;
-}
-
-#device-content ul li {
-  margin-bottom: 20px;
-}
-
-#reprovision-button {
-  padding: 8px 16px;
-  background-color: #dc2d5d;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  width: 240px;
-  height: 60px;
-}
-
-#reprovision-button:hover {
-  background-color: #0056b3;
-}
 /* ... (all your existing styles) ... */
 
 /* ADD THESE NEW STYLES AT THE END 
@@ -333,11 +186,6 @@ li {
   .menu-settings-container {
     width: 95%;
     height: auto; /* Allow height to be flexible */
-    padding: 10px;
-  }
-
-  .content {
-    width: 100%;
     padding: 10px;
   }
 
