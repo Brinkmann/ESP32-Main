@@ -4,6 +4,7 @@ const settingsPage = document.getElementById("settings-page");
 const patternsPage = document.getElementById("patterns-page");
 const reprovBanner = document.getElementById("reprov-banner");
 const tableContainer = document.getElementById("table-container");
+const speedButtons = document.querySelectorAll(".speed-button");
 
 // Get all buttons
 const patternsBtn = document.getElementById("patterns-btn");
@@ -70,6 +71,39 @@ function isValidDecodedPatternString(code) {
 
 const table = document.createElement("table");
 let activePattern = null;
+let selectedSpeedMultiplier = 1.0;
+
+const DEFAULT_SPEED_MULTIPLIER = 1.0;
+
+function setSelectedSpeedMultiplier(multiplier) {
+  selectedSpeedMultiplier = multiplier;
+  speedButtons.forEach((btn) => {
+    const matchesSelected = parseFloat(btn.dataset.speed) === multiplier;
+    btn.classList.toggle("active", matchesSelected);
+  });
+}
+
+function resetSpeedSelection() {
+  setSelectedSpeedMultiplier(DEFAULT_SPEED_MULTIPLIER);
+}
+
+speedButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const newMultiplier = parseFloat(button.dataset.speed);
+    setSelectedSpeedMultiplier(newMultiplier);
+
+    if (activePattern !== null) {
+      const activeSlider = activePattern === 99
+        ? testNetworkToggle
+        : document.getElementById(`pattern${activePattern}`);
+      if (activeSlider) {
+        handleSliderToggleChange(activeSlider, activePattern, true);
+      }
+    }
+  });
+});
+
+resetSpeedSelection();
 
 // --- Event Listeners ---
 
@@ -248,8 +282,14 @@ function createSliderToggleSwitch(rowNumber) {
 
 function handleSliderToggleChange(slider, rowNumber, forceState) {
   const isChecked = (forceState !== undefined) ? forceState : slider.checked;
-  
+
+  const isStartingPattern = isChecked && activePattern !== rowNumber;
+
   slider.checked = isChecked;
+
+  if (isStartingPattern || !isChecked) {
+    resetSpeedSelection();
+  }
 
   if (isChecked) {
     // A pattern is turned ON
@@ -279,6 +319,7 @@ function handleSliderToggleChange(slider, rowNumber, forceState) {
   const data = {
     pattern: rowNumber,
     state: isChecked,
+    speed: selectedSpeedMultiplier,
   };
   fetch("/patterns", {
     method: "POST",

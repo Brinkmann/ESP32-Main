@@ -95,12 +95,15 @@ void FeqWebServer::init(CredentialsType* cred){
                     request->send(200, "text/plain", "Here your response to patterns .");
                     const int pattern = jsonData["pattern"];
                     const bool state  = jsonData["state"];
-                    log_d("Pattern request for: number = %d , state = %d",pattern,state);
+                    const float speedMultiplier = jsonData["speed"] | 1.0f;
+                    const float clampedSpeed = constrain(speedMultiplier, 0.5f, 2.0f);
+                    log_d("Pattern request for: number = %d , state = %d , speed = %.2f",pattern,state,clampedSpeed);
                     
                     // SIMPLIFIED: We just set the global vars.
                     // The LedStrip task handles the rest.
-                    ledPatternStrip.patternActive = pattern; 
+                    ledPatternStrip.patternActive = pattern;
                     ledPatternStrip.state = state;
+                    ledPatternStrip.speedMultiplier = state ? clampedSpeed : 1.0f;
                     ledPatternStrip.receivedUpdate = true;
                 }
             }
