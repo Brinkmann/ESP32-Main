@@ -14,6 +14,7 @@ typedef struct LedPatternAattributes{
     int patternActive;
     bool state;
     bool receivedUpdate;
+    float speedMultiplier;
 
 } LedPatternAttributes;
 

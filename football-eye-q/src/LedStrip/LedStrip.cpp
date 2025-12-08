@@ -227,9 +227,10 @@ typedef struct NodeScanningProcess{
 } NodeScanningProcess;
 
 static PatternExecution pEx = {0};
-SystemPattern* pt = nullptr; 
+SystemPattern* pt = nullptr;
 const PatternPhase* ph = nullptr;
-NodeScanningProcess nodeScanning; 
+NodeScanningProcess nodeScanning;
+static float currentSpeedMultiplier = 1.0f;
 
 extern void meshNetworkSendPacket(BinaryPacket*, uint8_t);
 
@@ -257,8 +258,14 @@ static bool loadPattern(uint8_t patternId) {
 static void initPatternExecution() {
     if (pt == nullptr) return;
 
-    memset(&pEx, 0, sizeof(pEx)); 
-    
+    memset(&pEx, 0, sizeof(pEx));
+
+    currentSpeedMultiplier = (ledPatternStrip.speedMultiplier > 0.0f)
+                                 ? ledPatternStrip.speedMultiplier
+                                 : 1.0f;
+
+    log_d("Applying speed multiplier: %.2f", currentSpeedMultiplier);
+
     pEx.running = true;
     pEx.patternActive = ledPatternStrip.patternActive;
     pEx.nodesInPattern = (pt->phasesCount > 0) ? pt->phases[0].nodeCount : 0;
@@ -272,7 +279,12 @@ static void initPatternExecution() {
         ph = &pt->phases[startingPhase];
         for(uint8_t k = 0; k < pEx.nodesInPattern; ++k){
             pEx.runners[k].colour = ph->actions[k].colour;
-            pEx.runners[k].durationMs = ph->actions[k].duration * THREAD_TIME_MULTIPLIER_SECONDS;
+            float effectiveSeconds = (float)ph->actions[k].duration / currentSpeedMultiplier;
+            if (currentSpeedMultiplier > 1.0f && effectiveSeconds < 1.0f) {
+                effectiveSeconds = 1.0f;
+            }
+            const float durationTicks = effectiveSeconds * THREAD_TIME_MULTIPLIER_SECONDS;
+            pEx.runners[k].durationMs = (uint32_t)max(1.0f, durationTicks);
             pEx.runners[k].node   = ph->actions[k].index - 1;
             pEx.runners[k].phase  = startingPhase+1;
             pEx.runners[k].finished = false;
@@ -368,7 +380,12 @@ static void evaluateStripState(void){
             continue;
         }
 
-        pEx.runners[node].durationMs = (action->duration * THREAD_TIME_MULTIPLIER_SECONDS);
+        float effectiveSeconds = (float)action->duration / currentSpeedMultiplier;
+        if (currentSpeedMultiplier > 1.0f && effectiveSeconds < 1.0f) {
+            effectiveSeconds = 1.0f;
+        }
+        const float durationTicks = effectiveSeconds * THREAD_TIME_MULTIPLIER_SECONDS;
+        pEx.runners[node].durationMs = (uint32_t)max(1.0f, durationTicks);
         pEx.runners[node].colour = action->colour;
 
         if(pEx.runners[node].node == 0){ 
@@ -411,10 +428,11 @@ static void sendNodesPingRequest(void){
 }
 
 void ledStripTask(void *pvParameters){
-  
+
   displayLedStripStartUp();
   clearAllNodesOnStartUp();
   ledPatternStrip.receivedUpdate = false;
+  ledPatternStrip.speedMultiplier = 1.0f;
   nodeScanning.timeOut = 200;
   nodeScanning.nodesFound = 0;
   log_i("FEQ Led strip controller mode , is ready to receive commands. ");
