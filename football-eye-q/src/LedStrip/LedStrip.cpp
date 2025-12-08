@@ -279,8 +279,11 @@ static void initPatternExecution() {
         ph = &pt->phases[startingPhase];
         for(uint8_t k = 0; k < pEx.nodesInPattern; ++k){
             pEx.runners[k].colour = ph->actions[k].colour;
-            const float durationTicks =
-                (float)ph->actions[k].duration * THREAD_TIME_MULTIPLIER_SECONDS * currentSpeedMultiplier;
+            float effectiveSeconds = (float)ph->actions[k].duration / currentSpeedMultiplier;
+            if (currentSpeedMultiplier > 1.0f && effectiveSeconds < 1.0f) {
+                effectiveSeconds = 1.0f;
+            }
+            const float durationTicks = effectiveSeconds * THREAD_TIME_MULTIPLIER_SECONDS;
             pEx.runners[k].durationMs = (uint32_t)max(1.0f, durationTicks);
             pEx.runners[k].node   = ph->actions[k].index - 1;
             pEx.runners[k].phase  = startingPhase+1;
@@ -377,8 +380,11 @@ static void evaluateStripState(void){
             continue;
         }
 
-        const float durationTicks =
-            (float)action->duration * THREAD_TIME_MULTIPLIER_SECONDS * currentSpeedMultiplier;
+        float effectiveSeconds = (float)action->duration / currentSpeedMultiplier;
+        if (currentSpeedMultiplier > 1.0f && effectiveSeconds < 1.0f) {
+            effectiveSeconds = 1.0f;
+        }
+        const float durationTicks = effectiveSeconds * THREAD_TIME_MULTIPLIER_SECONDS;
         pEx.runners[node].durationMs = (uint32_t)max(1.0f, durationTicks);
         pEx.runners[node].colour = action->colour;
 

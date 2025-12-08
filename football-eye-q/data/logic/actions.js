@@ -76,6 +76,14 @@ let selectedSpeedMultiplier = 1.0;
 
 const DEFAULT_SPEED_MULTIPLIER = 1.0;
 
+function getSpeedDescription(multiplier) {
+  if (Math.abs(multiplier - 0.5) < 0.001) return "Slower";
+  if (Math.abs(multiplier - 1.0) < 0.001) return "Standard";
+  if (Math.abs(multiplier - 1.5) < 0.001) return "Faster";
+  if (Math.abs(multiplier - 2.0) < 0.001) return "Very fast";
+  return "Custom";
+}
+
 function setSelectedSpeedMultiplier(multiplier) {
   selectedSpeedMultiplier = multiplier;
   speedButtons.forEach((btn) => {
@@ -85,7 +93,8 @@ function setSelectedSpeedMultiplier(multiplier) {
     btn.setAttribute("aria-pressed", matchesSelected ? "true" : "false");
   });
   if (speedFeedback) {
-    speedFeedback.textContent = `Speed: ${multiplier.toFixed(1)}x`;
+    const descriptor = getSpeedDescription(multiplier);
+    speedFeedback.textContent = `Speed: ${multiplier.toFixed(1)}x (${descriptor})`;
   }
 }
 
