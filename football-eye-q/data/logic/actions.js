@@ -4,8 +4,8 @@ const settingsPage = document.getElementById("settings-page");
 const patternsPage = document.getElementById("patterns-page");
 const reprovBanner = document.getElementById("reprov-banner");
 const tableContainer = document.getElementById("table-container");
-const speedButtons = document.querySelectorAll(".speed-button");
-const speedFeedback = document.getElementById("speed-feedback");
+let speedButtons = [];
+let speedFeedback = null;
 
 // Get all buttons
 const patternsBtn = document.getElementById("patterns-btn");
@@ -93,23 +93,34 @@ function resetSpeedSelection() {
   setSelectedSpeedMultiplier(DEFAULT_SPEED_MULTIPLIER);
 }
 
-speedButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const newMultiplier = parseFloat(button.dataset.speed);
-    setSelectedSpeedMultiplier(newMultiplier);
+function initSpeedControls() {
+  speedButtons = Array.from(document.querySelectorAll(".speed-button"));
+  speedFeedback = document.getElementById("speed-feedback");
 
-    if (activePattern !== null) {
-      const activeSlider = activePattern === 99
-        ? testNetworkToggle
-        : document.getElementById(`pattern${activePattern}`);
-      if (activeSlider) {
-        handleSliderToggleChange(activeSlider, activePattern, true);
+  if (speedButtons.length === 0) {
+    console.warn("Speed buttons were not found on the page.");
+    return;
+  }
+
+  speedButtons.forEach((button) => {
+    button.type = "button";
+    button.addEventListener("click", () => {
+      const newMultiplier = parseFloat(button.dataset.speed);
+      setSelectedSpeedMultiplier(newMultiplier);
+
+      if (activePattern !== null) {
+        const activeSlider = activePattern === 99
+          ? testNetworkToggle
+          : document.getElementById(`pattern${activePattern}`);
+        if (activeSlider) {
+          handleSliderToggleChange(activeSlider, activePattern, true);
+        }
       }
-    }
+    });
   });
-});
 
-resetSpeedSelection();
+  resetSpeedSelection();
+}
 
 // --- Event Listeners ---
 
@@ -420,5 +431,6 @@ function runSessionDecoderSelfTest() {
   });
 }
 
+initSpeedControls();
 runSessionDecoderSelfTest();
 initIndexPage();
